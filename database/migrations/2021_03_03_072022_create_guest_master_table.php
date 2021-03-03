@@ -26,10 +26,10 @@ class CreateGuestMasterTable extends Migration
             $table->string('detail_tujuan')->nullable();
             $table->time('jam_kedatangan')->nullable();
             $table->float('suhu_tubuh')->nullable();
-            $table->boolean('survey1')->nullable();
-            $table->boolean('survey2')->nullable();
-            $table->boolean('survey3')->nullable();
-            $table->boolean('survey4')->nullable();
+            $table->boolean('survey1');
+            $table->boolean('survey2');
+            $table->boolean('survey3');
+            $table->boolean('survey4');
             $table->timestamps();
         });
     }
