@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/guest_master', 'GuestController@index');
 //Route::get('/guest_master', [GuestController::class, 'index']);
 
+Route::get('/contact', [GuestController::class, 'createForm']);
+
+Route::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');
