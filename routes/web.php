@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\GuestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/guest_master', 'GuestController@index');
+//Route::get('/guest_master', [GuestController::class, 'index']);
 
 Route::get('/contact', [GuestController::class, 'createForm']);
 
