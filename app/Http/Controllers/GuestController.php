@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class GuestController extends Controller{
     //
-    public function createform(request $_REQUEST) {
+    public function createform(request $REQUEST) {
         return view('guest');  
 }
 public function GuestController(request $request) {
