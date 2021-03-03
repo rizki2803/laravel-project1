@@ -17,6 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tb_pegawai', 'PegawaiController@index');
-Route::get('/tb_pegawai', 'TamuController@index');
-Route::get('/tb_pegawai', 'TipeTamuController@index');
+Route::get('/guest_master', 'GuestController@index');
+
