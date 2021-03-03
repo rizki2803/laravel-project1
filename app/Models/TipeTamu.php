@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipeTamu extends Model
 {
+    protected $table = "tb_tipetamu";
     use HasFactory;
 }
