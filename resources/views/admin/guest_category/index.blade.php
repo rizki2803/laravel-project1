@@ -46,7 +46,7 @@
                     @foreach($data as $category)
                     <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$category->id}}</td>
+                    <td>{{$category->id_category}}</td>
                     <td>{{$category->category}}</td>
                     <td><button class="btn btn-primary">edit</button></td>
                     </tr>

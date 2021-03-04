@@ -15,7 +15,7 @@ class CreateGuestCategoryTable extends Migration
     public function up()
     {
         Schema::create('guest_category', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id_category')->primary();
             $table->string('category');
             $table->timestamps();
         });
