@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class GuestCategory extends Model
 {
     protected $table="guest_category";
-    protected $fillable=["id","category"];
+    protected $fillable=["id_category","category"];
 }
