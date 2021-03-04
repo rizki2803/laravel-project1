@@ -17,6 +17,7 @@ class CreateGuestMasterTable extends Migration
         Schema::create('guest_master', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_tamu')->nullable();
+            $table->uuid('id_category');
             $table->integer('tlp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('instansi')->nullable();
