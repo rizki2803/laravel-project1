@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/guest_master', 'GuestController@index');
+Route::get('/guest_receptionist', 'ReceptionistController@index');
+Route::get('/guest_security', 'SecurityController@index');
 Route::get('/guest_category', 'GuestCategoryController@index');
 //Route::get('/guest_master', [GuestController::class, 'index']);
 
