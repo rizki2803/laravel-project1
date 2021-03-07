@@ -46,8 +46,8 @@
                     @foreach($data as $category)
                     <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$category->id_category}}</td>
-                    <td>{{$category->category}}</td>
+                    <td>{{$category->gc_id}}</td>
+                    <td>{{$category->gc_tipe}}</td>
                     <td><button class="btn btn-primary">edit</button></td>
                     </tr>
                     @endforeach

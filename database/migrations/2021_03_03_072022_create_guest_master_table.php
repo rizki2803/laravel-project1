@@ -16,21 +16,20 @@ class CreateGuestMasterTable extends Migration
     {
         Schema::create('guest_master', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nama_tamu')->nullable();
-            $table->uuid('id_category');
-            $table->integer('tlp')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('instansi')->nullable();
-            $table->string('tujuan')->nullable();
-            $table->string('nama_pic')->nullable();            
-            $table->time('jam_janji')->nullable();
-            $table->string('detail_tujuan')->nullable();
-            $table->time('jam_kedatangan')->nullable();
-            $table->float('suhu_tubuh')->nullable();
-            $table->boolean('survey1');
-            $table->boolean('survey2');
-            $table->boolean('survey3');
-            $table->boolean('survey4');
+            $table->uuid('gc_id');
+            $table->string('gm_nama')->nullable();
+            $table->integer('gm_tlp')->nullable();
+            $table->string('gm_almt')->nullable();
+            $table->string('gm_inst')->nullable();
+            $table->uuid('gpic_id');            
+            $table->time('gm_wj')->nullable();
+            $table->string('gm_tjn')->nullable();
+            $table->time('gm_jd')->nullable();
+            $table->float('gm_suhu')->nullable();
+            $table->boolean('gm_srv1')->nullable();
+            $table->boolean('gm_srv2')->nullable();
+            $table->boolean('gm_srv3')->nullable();
+            $table->boolean('gm_srv4')->nullable();
             $table->timestamps();
         });
     }
