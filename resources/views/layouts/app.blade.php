@@ -11,6 +11,12 @@
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.css">
+  <!-- date-range-picker -->
+  <script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- jQuery -->
+  <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 
