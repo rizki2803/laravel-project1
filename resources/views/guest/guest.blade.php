@@ -35,6 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container">
           <div class="row mb-2">
             <div class="col-sm-6">
+            <img class="profile-user-img img-fluid img-circle" src="{{asset('img')}}/HariffLogo.png" alt="User profile picture">
               <h1 class="m-0"> PT.Hariff DTE </h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
@@ -59,11 +60,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.card-header -->
               <!-- form start -->
               <div class="card-body">
-                <form>
+                <form action="{{route('survey.store')}}"method="post">
+                  @csrf
                   <div class="form-group">
                     <label>Kategori Tamu</label>
 
-                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
+                    <select name="kategori_tamu" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
                       <option selected="selected" data-select2-id="11">Visitor</option>
                       <option data-select2-id="39">Interview</option>
                       <option data-select2-id="42">Promoti</option>
@@ -72,24 +74,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <div class="form-group">
                     <label>Nama</label>
-                    <input type="text" class="form-control" placeholder="Enter ...">
+                    <input name="nama" type="text" class="form-control" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>No telp</label>
-                    <input type="text" class="form-control" placeholder="Enter ...">
+                    <input name="tlp" type="text" class="form-control" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Alamat</label>
-                    <input type="text" class="form-control" placeholder="Enter ...">
+                    <input name="alamat" type="text" class="form-control" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Nama Instansi</label>
-                    <input type="text" class="form-control" placeholder="Enter ...">
+                    <input name="nama_instansi" type="text" class="form-control" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Tujuan :</label><br>
                     <label>Nama PIC</label>
-                    <input type="text" class="form-control" placeholder="Enter ...">
+                    <input name="nama_pic" type="text" class="form-control" placeholder="Enter ...">
                   </div>
                   <div class="form-group">
                     <label>Tanggal:</label>
@@ -98,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                       </div>
-                      <input type="date" class="form-control float-right" id="reservation">
+                      <input name="date" type="date" class="form-control float-right" id="reservation">
                     </div>
 
                     <!-- /.input group -->
@@ -110,17 +112,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                       </div>
-                      <input type="time" class="form-control float-right" id="reservation">
+                      <input name="jam" type="time" class="form-control float-right" id="reservation">
                     </div>
                     <div class="form-group">
                       <label>Detail Tujuan</label>
-                      <input type="text" class="form-control" placeholder="Enter ...">
+                      <input name="detail_tujuan" type="text" class="form-control" placeholder="Enter ...">
                     </div>
                     <div class="col-sm-6">
                       <!-- radio -->
                       <label>Kondisi Tubuh :</label><br>
                       <div class="icheck-danger d-inline">
-                        <input type="radio" name="r1" checked="" id="radioDanger1">
+                        <input  type="radio" name="r1" checked="" id="radioDanger1">
                         <label for="radioDanger1">
                           Sehat
                         </label>
@@ -174,12 +176,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <!-- /.input group -->
                         </div>
                         <!-- /.card-body -->
-
+                        <button type="submit" class="btn btn-primary">Submit</button>
 
                 </form>
 
               </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                
                
 
 
