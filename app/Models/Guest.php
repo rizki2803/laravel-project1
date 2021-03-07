@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guest extends Model
 {
+    use HasFactory;
     protected $table="guest_master";
     protected $fillable=["nama_tamu", "tlp", "alamat", "instansi", "tujuan", 
     "nama_pic", "jam_janji", "detail_tujuan", "jam_kedatangan", "suhu_tubuh", 
