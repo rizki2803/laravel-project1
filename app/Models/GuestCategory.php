@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GuestCategory extends Model
 {
-    protected $table="guest_category";
-    protected $fillable=["id_category","category"];
+    protected $table="guest_cat";
+    protected $fillable=["gc_id","gc_tipe"];
 }

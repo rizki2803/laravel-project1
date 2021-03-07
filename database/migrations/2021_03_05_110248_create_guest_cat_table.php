@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Ramsey\Uuid\Uuid;
 
-class CreateGuestCategoryTable extends Migration
+class CreateGuestCatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class CreateGuestCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('guest_category', function (Blueprint $table) {
-            $table->uuid('id_category')->primary();
-            $table->string('category');
+        Schema::create('guest_cat', function (Blueprint $table) {
+            $table->uuid('gc_id')->primary();
+            $table->string('gc_tipe');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateGuestCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guest_category');
+        Schema::dropIfExists('guest_cat');
     }
 }

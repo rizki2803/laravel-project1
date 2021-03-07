@@ -9,7 +9,6 @@ class Guest extends Model
 {
     use HasFactory;
     protected $table="guest_master";
-    protected $fillable=["nama_tamu", "id_category", "tlp", "alamat", "instansi", "tujuan", 
-    "nama_pic", "jam_janji", "detail_tujuan", "jam_kedatangan", "suhu_tubuh", 
-    "survey1", "survey2", "survey3", "survey4"];
+    protected $fillable=["gc_id", "gm_nama", "gm_tlp", "gm_almt", "gpic_ip", "gm_wj", 
+    "gm_tjn", "gm_jd", "gm_suhu", "gm_srv1", "gm_srv2", "gm_srv3", "gm_srv4"];
 }
