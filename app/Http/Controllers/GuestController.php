@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\GuestCategory;
 use App\Models\Guest;
@@ -10,10 +9,14 @@ use Ramsey\Uuid\Uuid;
 
 class GuestController extends Controller{
     //
-    
     public function index()
     {
-        
+        return view ('guest.guest');
+        /*  $data = Guest::get();
+          return view('guest.index',[
+              'data'=>$data
+          ]);
+          */
     }
 
         public function guest_cat()
