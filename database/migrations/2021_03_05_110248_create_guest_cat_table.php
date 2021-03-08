@@ -15,7 +15,7 @@ class CreateGuestCatTable extends Migration
     public function up()
     {
         Schema::create('guest_cat', function (Blueprint $table) {
-            $table->uuid('gc_id')->primary();
+            $table->uuid('id')->primary();
             $table->string('gc_tipe');
             $table->timestamps();
         });

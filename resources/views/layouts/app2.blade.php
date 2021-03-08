@@ -6,6 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="{{asset('img')}}/HariffLogo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PT. Hariff DTE</title>
 
@@ -32,15 +33,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="container">
       <a href="{{asset('assets')}}/index3.html" class="navbar-brand">
         <img src="{{asset('img')}}/HariffLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Pt. Hariff DTE</span>
+        <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>
-
-      
     </div>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{asset('assets')}}/index3.html" class="nav-link">Logout</a>
+      </li>
+    </ul>
   </nav>
     <div class="content-wrapper">
      @yield('content')
     </div>
-    <footer class="main-footer">
+    <footer class="main-footer text-sm">
         <strong>Copyright &copy; 2021 <a href="https://hariff.co.id/">PT. Hariff DTE</a>.</strong> All rights reserved.
     </footer>

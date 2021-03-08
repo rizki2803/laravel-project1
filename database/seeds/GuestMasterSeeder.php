@@ -17,7 +17,7 @@ class GuestMasterSeeder extends Seeder
     public function run()
     {
         Guest::create([
-            'gm_id'=>Uuid::uuid4(),
+            'id'=>Uuid::uuid4(),
             'gc_id'=>Uuid::uuid4(),
             'gm_nama'=>'nama tamu',
             'gm_tlp'=>'123123',
@@ -28,6 +28,18 @@ class GuestMasterSeeder extends Seeder
             'gm_tjn'=>'tujuan',
             'gm_jd'=>Carbon::now(), 
             'gm_suhu'=>'35.5'
+        ]);
+        GuestCategory::create([
+            'id'=>Uuid::uuid4(),
+            'gc_tipe'=>'Visitor'
+        ]);
+        GuestCategory::create([
+            'id'=>Uuid::uuid4(),
+            'gc_tipe'=>'Interview'
+        ]);
+        GuestCategory::create([
+            'id'=>Uuid::uuid4(),
+            'gc_tipe'=>'Promotion'
         ]);
     }
 }

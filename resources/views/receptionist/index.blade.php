@@ -8,7 +8,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data Table Tamu</h3>
+            <h3 class="card-title">Guest Data Tables</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -30,6 +30,7 @@
                   <th>Survey 2</th>
                   <th>Survey 3</th>
                   <th>Survey 4</th>
+                  <th>Jam Keluar</th>
 
 
                 </tr>
@@ -55,6 +56,7 @@
                   <td>{{$receptionist->gm_srv2}}</td>
                   <td>{{$receptionist->gm_srv3}}</td>
                   <td>{{$receptionist->gm_srv4}}</td>
+                  <td>{{$receptionist->gm_klr}}</td>
                 </tr>
 
                 @endforeach
