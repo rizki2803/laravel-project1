@@ -48,9 +48,9 @@ class GuestController extends Controller
             'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
             'gm_suhu' => $request->suhu,
             'gm_srv1' => ($request->r1 == "Ya")?1:0,
-            'gm_srv2' => ($request->r2 == "YA")?1:0,
-            'gm_srv3' => ($request->r3 == "YA")?1:0,
-            'gm_srv4' => ($request->r4 == "YA")?1:0
+            'gm_srv2' => ($request->r2 == "Ya")?1:0,
+            'gm_srv3' => ($request->r3 == "Ya")?1:0,
+            'gm_srv4' => ($request->r4 == "Ya")?1:0
         ];
         // dd($store);
         
