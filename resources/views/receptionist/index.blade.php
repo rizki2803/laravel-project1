@@ -9,10 +9,18 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Guest Data Tables</h3>
-          </div>
+            <div class="input-group input-group-sm float-sm-right" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+            </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="table_guest" class="table table-bordered table-striped table-responsive">
+            <table id="table" class="table table-bordered table-striped table-responsive">
               <thead>
                 <tr>
                   <th>#</th>
@@ -31,8 +39,6 @@
                   <th>Survey 3</th>
                   <th>Survey 4</th>
                   <th>Jam Keluar</th>
-
-
                 </tr>
               </thead>
               <tbody>
@@ -62,6 +68,9 @@
                 @endforeach
               </tbody>
             </table>
+            </br>
+            <button class="btn btn-secondary buttons-excel buttons-html5 float-sm-right" tabindex="0" aria-controls="table" type="button"><span>Excel</span></button>
+            <button class="btn btn-secondary buttons-pdf buttons-html5 float-sm-right" tabindex="0" aria-controls="table" type="button"><span>PDF</span></button>
           </div>
         </div>
       </div>

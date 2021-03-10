@@ -5,15 +5,10 @@
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-6 text-light">
             <h1>DataTables</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
+          
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -26,7 +21,10 @@
                 <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Category</h3>
-                </div>
+                    <a href="{{route('gc_form')}}" class="float-sm-right btn btn-xs btn-primary">
+                          <i class="fa fa-plus"></i>
+                    </a>
+                    </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -42,11 +40,18 @@
                     @php
                     $no=1;
                     @endphp
-                    @foreach($data as $category)
+                    @foreach($gc as $category)
                     <tr>
-                    <td>{{$no++}}</td>
-                    <td>{{$category->gc_tipe}}</td>
-                    <td><button class="btn btn-primary">edit</button></td>
+                      <td>{{$no++}}</td>
+                        <td>{{$category->gc_tipe}}</td>
+                        <td>
+                        <a href="{{route('gc_edit',$category->id)}}" class="btn btn-sm btn-warning">
+                          <i class="fa fa-edit "></i>
+                        </a>
+                        <a href="{{route('gc_del',$category->id)}}" class="btn btn-sm btn-danger">
+                          <i class="fa fa-trash-alt "></i>
+                        </a> 
+                    </td>
                     </tr>
                     @endforeach
                     </tbody>
