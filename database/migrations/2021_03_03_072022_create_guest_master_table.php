@@ -18,7 +18,7 @@ class CreateGuestMasterTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('gc_id');
             $table->string('gm_nama')->nullable();
-            $table->integer('gm_tlp')->nullable();
+            $table->string('gm_tlp')->nullable();
             $table->string('gm_almt')->nullable();
             $table->string('gm_inst')->nullable();
             $table->uuid('gpic_id');            
@@ -26,7 +26,10 @@ class CreateGuestMasterTable extends Migration
             $table->string('gm_tjn')->nullable();
             $table->time('gm_jd')->nullable();
             $table->float('gm_suhu')->nullable();
-           ->nullable();
+            $table->boolean('gm_srv1')->nullable();
+            $table->boolean('gm_srv2')->nullable();
+            $table->boolean('gm_srv3')->nullable();
+            $table->boolean('gm_srv4')->nullable();
             $table->time('gm_klr')->nullable();
             $table->timestamps();
         });
