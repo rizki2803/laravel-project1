@@ -36,8 +36,6 @@
                       <th>Survey 4</th>
                       <th>Jam Keluar</th>
                       <th>Action</th>
-
-
                     </tr>
                   </thead>
                   <tbody>
@@ -47,7 +45,7 @@
                     @foreach($data as $security)
                     <tr>
                       <td>{{$no++}}</td>
-                      <td>{{$security->gc_id}}</td>
+                      <td>{{$security->gc_tipe}}</td>
                       <td>{{$security->gm_nama}}</td>
                       <td>{{$security->gm_tlp}}</td>
                       <td>{{$security->gm_almt}}</td>
