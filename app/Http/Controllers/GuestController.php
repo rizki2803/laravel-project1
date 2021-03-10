@@ -7,18 +7,14 @@ use App\Models\GuestCategory;
 use App\Models\Guest;
 use DataTables;
 use Ramsey\Uuid\Uuid;
-<<<<<<< HEAD
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-=======
-use Carbon\Carbon;
->>>>>>> 864b4daafed6f8333a2fc2aa7bdd20c45f8154bd
+
 
 class GuestController extends Controller
 {
     //
-<<<<<<< HEAD
     public function index()
     {
         $data['gc'] = \DB::table('guest_cat')->pluck('gc_tipe', 'gc_tipe');
@@ -82,66 +78,7 @@ class GuestController extends Controller
     // return view ('guest.survey');
 
 
-    public function guest_cat()
-    {
-        $data = GuestCategory::get();
-        return view('admin.guest_category.index', [
-            'data' => $data
-        ]);
-    }
-
-    public function receptionist()
-    {
-        $data = Guest::get();
-        return view('receptionist.index', [
-            'data' => $data
-        ]);
-    }
-
-    public function security()
-    {
-        DB::table('survey')->insert([
-            'id' => Uuid::uuid4(),
-            'gc_id' => $request->id,
-            'gm_nama' => $request->nama,
-            'gm_tlp' => $request->tlp,
-            'gm_almt' => $request->alamat,
-            'gm_inst' => $request->instansi,
-            'gpic_id' => $request->namapic,
-            'gm_wj' => $request->janji,
-            'gm_tjn' => $request->dtltujuan,
-            'gm_jd' => Carbon::now(),
-            'gm_suhu' => $request->suhu
-        ]);
-        return redictect('guest.survey');
-        /*$data['data'] = \DB::table('guest_master')
-        ->leftjoin('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-        ->get();
-
-        $data2 = \DB::table('guest_cat')
-        ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-        ->get();
-        dd($data['data'], $data2);
-
-        return view('security.index', $data);
-        */
-
-
-        $data = Guest::get();
-        return view('security.index', [
-            'data' => $data
-        ]);
-    }
-=======
-        public function index()
-        {
-            return view ('guest.guest');
-            /*  $data = Guest::get();
-            return view('guest.index',[
-                'data'=>$data
-            ]);
-            */
-        }
+   
         public function guest_master()
         {
             $data ['gc'] = \DB::table('guest_master')->get();
@@ -242,5 +179,4 @@ class GuestController extends Controller
                 dd($a);
             return redirect()->back();   
         }
->>>>>>> 864b4daafed6f8333a2fc2aa7bdd20c45f8154bd
 }
