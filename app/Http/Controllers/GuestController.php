@@ -1,59 +1,129 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\GuestCategory;
 use App\Models\Guest;
 use Ramsey\Uuid\Uuid;
+use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
-
-class GuestController extends Controller{
+class GuestController extends Controller
+{
     //
     public function index()
     {
-        return view ('guest.guest');
+        $data['gc'] = \DB::table('guest_cat')->pluck('gc_tipe', 'gc_tipe');
+
+        return view('guest.guest', $data);
         /*  $data = Guest::get();
           return view('guest.index',[
               'data'=>$data
           ]);
           */
     }
+    public function guest(Request $request)
+    {
+        return view('guest.survey');
+    }
+    public function store(Request $request)
+    {
+       
+       
+        $store =[
+            'id' => Uuid::uuid4(),
+            'gc_id' => $request->id,
+            'gm_nama' => $request->nama,
+            'gm_tlp' => $request->tlp,
+            'gm_almt' => $request->alamat,
+            'gm_inst' => $request->instansi,
+            'gpic_id' => $request->namapic,
+            'gm_wj' => $request->janji,
+            'gm_tjn' => $request->dtltujuan,
+            'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
+            'gm_suhu' => $request->suhu
+        ];
+        dd($store);
+        \DB::table('survey')->insert();
+        return redictect('guest.survey');
+    }
+    /* $store =[
+        'id'=>Uuid::uuid4(),
+        'gc_id'=>$request->gc,
+        'gm_nama'=>'nama tamu',
+        'gm_tlp'=>'123123',
+        'gm_almt'=>'alamat',
+        'gm_inst'=>'instansi',
+        'gpic_id'=>Uuid::uuid4(),            
+        'gm_wj'=>Carbon::now(),
+        'gm_tjn'=>'tujuan',
+        'gm_jd'=>Carbon::now(),
+        'gm_suhu'=>'35.5',
+        'gm_srv1'=>''
+        $table->boolean('gm_srv1')
+        $table->boolean('gm_srv2')
+        $table->boolean('gm_srv3')
+        $table->boolean('gm_srv4')
+      ];
 
-        public function guest_cat()
-        {
-            $data = GuestCategory::get();
-            return view('admin.guest_category.index',[
-                'data'=>$data
-            ]);
-        }
-
-        public function receptionist()
-        {
-            $data = Guest::get();
-            return view('receptionist.index',[
-                'data'=>$data
-            ]);
-            
-        }
-
-        public function security()
-        {
-            /*$data['data'] = \DB::table('guest_master')
-            ->leftjoin('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-            ->get();
-
-            $data2 = \DB::table('guest_cat')
-            ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-            ->get();
-            dd($data['data'], $data2);
-
-            return view('security.index', $data);
-            */
+      Alert::question('Data yang diisi sudah selesai?');
+        return back();*/
 
 
-            $data = Guest::get();
-            return view('security.index',[
-                'data'=>$data
-            ]);
-        }
+    // return $request;
+    // return view ('guest.survey');
+
+
+    public function guest_cat()
+    {
+        $data = GuestCategory::get();
+        return view('admin.guest_category.index', [
+            'data' => $data
+        ]);
+    }
+
+    public function receptionist()
+    {
+        $data = Guest::get();
+        return view('receptionist.index', [
+            'data' => $data
+        ]);
+    }
+
+    public function security()
+    {
+        DB::table('survey')->insert([
+            'id' => Uuid::uuid4(),
+            'gc_id' => $request->id,
+            'gm_nama' => $request->nama,
+            'gm_tlp' => $request->tlp,
+            'gm_almt' => $request->alamat,
+            'gm_inst' => $request->instansi,
+            'gpic_id' => $request->namapic,
+            'gm_wj' => $request->janji,
+            'gm_tjn' => $request->dtltujuan,
+            'gm_jd' => Carbon::now(),
+            'gm_suhu' => $request->suhu
+        ]);
+        return redictect('guest.survey');
+        /*$data['data'] = \DB::table('guest_master')
+        ->leftjoin('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
+        ->get();
+
+        $data2 = \DB::table('guest_cat')
+        ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
+        ->get();
+        dd($data['data'], $data2);
+
+        return view('security.index', $data);
+        */
+
+
+        $data = Guest::get();
+        return view('security.index', [
+            'data' => $data
+        ]);
+    }
 }
