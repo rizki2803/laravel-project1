@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.card-header -->
                 <!-- form start -->
                 <div class="card-body">
-                  <form action="{{route('survey')}}" method="post">
+                  <form action="{{route('survey.store')}}" method="post">
                     @csrf
                     <label>Pilih :</label><br>
                     <div class="form-group">
@@ -113,17 +113,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="form-group">
                       <label>Tujuan :</label><br>
                       <label>Nama PIC</label>
-                      <input name="namapic" type="text" class="form-control" required="required" placeholder="Enter ...">
+                      <input name="namapic" type="text" class="form-control" placeholder="Enter ...">
                     </div>
                     <div class="form-group">
-                      <label>Tanggal:</label>
-
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-clock"></i></span>
-                        </div>
-                        <input name="date" type="date" class="form-control float-right" id="reservation">
-                      </div>
                       <!-- /.input group -->
                     </div>
                     <div class="form-group">
@@ -134,65 +126,69 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <span class="input-group-text"><i class="far fa-clock"></i></span>
                         </div>
                         <input name="jam" type="time" class="form-control float-right" id="reservation">
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Detail Tujuan</label>
-                        <input name="dtltujuan" type="text" class="form-control" required="required" placeholder="Enter ...">
+                        <textarea name="dtltujuan" type="text" class="form-control" rows="3" required="required" placeholder="Enter ..."></textarea>
                       </div>
                       <div class="form-group">
                         <label>Suhu Tubuh</label>
-                        <input name="suhu" type="text" class="form-control" required="required" placeholder="26.0">
+                        <input name="suhu" type="text" class="form-control" required="required" placeholder="36.0">
                       </div>
                       <!-- radio -->
                       <div class="col-sm-12">
                         <label>Kondisi Tubuh :</label><br>
+                        <label>Apakah anda sedang sakit?</label><br>
                         <div class="icheck-danger d-inline col-3">
-                          <input type="radio" name="r1" checked="" id="radioDanger1">
-                          <label for="radioDanger1">
-                            Sehat
+                          <input type="radio" name="r1" value ="Ya" id="radioDanger1">
+                          <label for="radioDanger2">
+                            YA
                           </label>
                         </div>
                         <div class="icheck-danger d-inline ">
-                          <input type="radio" name="r1" id="radioDanger2">
+                          <input type="radio" name="r1" value ="tidak" id="radioDanger2">
                           <label for="radioDanger2">
                             Tidak
                           </label>
                         </div>
+                        <br><label>Apakah anda mengalami batuk dalam 3 hari terakhir ?</label><br>
                         <div class="form-group clearfix">
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r2" checked="" id="radioDanger1">
+                            <input type="radio" name="r2" value ="Ya" id="radioDanger1">
                             <label for="radioDanger1">
-                              Batuk
+                              YA
                             </label>
                           </div>
                           <div class="icheck-danger d-inline col-6">
-                            <input type="radio" name="r2" id="radioDanger2">
+                            <input type="radio" name="r2" value ="tidak" id="radioDanger2">
                             <label for="radioDanger2">
                               Tidak
                             </label>
                           </div><br>
+                          <label>Apakah anda mengalami sakit tenggorokan dalam 3 hari terakhir ?</label><br>
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r3" checked="" id="radioDanger1">
+                            <input type="radio" name="r3" value ="Ya" id="radioDanger1">
                             <label for="radioDanger1">
-                              Sakit Tenggorokan
+                              YA
                             </label>
                           </div>
                           <div class="icheck-danger d-inline col-6">
-                            <input type="radio" name="r3" id="radioDanger2">
+                            <input type="radio" name="r3"  value ="tidak" id="radioDanger2">
                             <label for="radioDanger2">
                               Tidak
                             </label>
                           </div>
                           <div class="form-group clearfix">
-                            <label>Indra Penciuman :</label><br>
+                            
+                            <label>apakah indra penciuman anda sedang tidak normal dalam 3 hari terakhir ?</label><br>
                             <div class="icheck-danger d-inline col-3">
-                              <input type="radio" name="r4" checked="" id="radioDanger1">
+                              <input type="radio" name="r4" value ="Ya" id="radioDanger1">
                               <label for="radioDanger1">
-                                Normal
+                                YA
                               </label>
                             </div>
                             <div class="icheck-danger d-inline col-6">
-                              <input type="radio" name="r4" id="radioDanger2">
+                              <input type="radio" name="r4" value ="tidak" id="radioDanger2">
                               <label for="radioDanger2">
                                 Tidak
                               </label>
