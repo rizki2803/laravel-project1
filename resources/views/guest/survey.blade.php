@@ -64,38 +64,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <!-- jquery validation -->
                             <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Silahkan Login : </h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form id="quickForm" novalidate="novalidate">
-                                    <div class="card-body">
-                                        @csrf
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input type="email" class="form-control" placeholder="Email">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                            </div>
-                                            <input type="password" class="form-control" placeholder="password">
-                                        </div>
-                                       
-                                        <div class="form-group mb-0">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
-                                                <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
-                                            </div>
-                                        </div>
+                            <center><label>data berhasil terinput terima kasih</label></center>
+                                        
+                                        
                                     </div>
                                     <!-- /.card-body -->
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">SIGN IN</button>
-                                    </div>
+                                   
                                 </form>
                             </div>
                             <!-- /.card -->

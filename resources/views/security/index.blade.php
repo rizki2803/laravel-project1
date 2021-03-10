@@ -16,7 +16,7 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <table id="example2" class="table table-bordered table-hover table-responsive">
+                <table id="table" class="table table-bordered table-hover table-responsive">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -62,7 +62,8 @@
                       <td>{{$security->gm_srv3}}</td>
                       <td>{{$security->gm_srv4}}</td>
                       <td>{{$security->gm_klr}}</td>
-                      <td><button class="btn btn-primary">keluar</button></td>
+                      <td><center><a href="{{route('scrt_upt', $security->id)}}" class="btn btn-sm btn-danger">
+                      <i class="fa fa-door-open "></i></center></td>
                     </tr>
                     @endforeach
                   </tbody>

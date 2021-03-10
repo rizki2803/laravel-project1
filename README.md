@@ -42,10 +42,6 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Many](https://www.many.co.uk)**
 - **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
 - **[DevSquad](https://devsquad.com)**
-<<<<<<< HEAD
-- **[Curotec](https://www.curotec.com/)**
-=======
->>>>>>> 46c2d4c67a228d39ff37b28a270998c0312a7864
 - **[OP.GG](https://op.gg)**
 
 ## Contributing
@@ -63,7 +59,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-<<<<<<< HEAD
-# project1laravel
-=======
->>>>>>> 46c2d4c67a228d39ff37b28a270998c0312a7864
