@@ -16,17 +16,11 @@ use App\Http\Controllers\GuestController;
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
 ;
 Route::get('/survey/guest','GuestController@guest')->name('survey_store');
 Route::post('/survey/store','GuestController@store')->name('survey');
 Route::get('/guest_master', 'GuestController@index')->name('guest_master');
-Route::get('/guest_receptionist', 'GuestController@receptionist')->name('receptionist');
-Route::get('/guest_security', 'GuestController@security')->name('security');
-Route::get('/guest_category', 'GuestController@guest_cat');
-=======
 
-Route::get('/guest_master', 'GuestController@index');
 Route::get('/guest_receptionist', 'GuestController@receptionist');
 
 Route::get('/guest_security', 'GuestController@security');
@@ -41,7 +35,6 @@ Route::get('/guest_category/edit/{id}', 'GuestController@guest_cat_edit')->name(
 Route::get('/guest_category/upt/{id}', 'GuestController@guest_cat_upt')->name('gc_upt');
 Route::get('/guest_category/del/{id}', 'GuestController@guest_cat_del')->name('gc_del');
 
->>>>>>> 864b4daafed6f8333a2fc2aa7bdd20c45f8154bd
 //Route::get('/guest_master', [GuestController::class, 'index']);
 
 Route::get('/contact', [GuestController::class, 'createForm']);

@@ -138,13 +138,9 @@ return [
 
         /*
          * Laravel Framework Service Providers...
-<<<<<<< HEAD
          */ 
         
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-=======
-         */
->>>>>>> 864b4daafed6f8333a2fc2aa7bdd20c45f8154bd
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
