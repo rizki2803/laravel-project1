@@ -16,10 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2",
-<<<<<<< HEAD
         "nesbot/carbon": "^2.46",
-=======
->>>>>>> 864b4daafed6f8333a2fc2aa7bdd20c45f8154bd
         "ramsey/uuid": "^4.1",
         "realrashid/sweet-alert": "^3.2",
         "uxweb/sweet-alert": "^2.0",
