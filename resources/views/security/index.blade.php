@@ -57,10 +57,10 @@
                       <td>{{$security->gm_tjn}}</td>
                       <td>{{$security->gm_jd}}</td>
                       <td>{{$security->gm_suhu}}</td>
-                      <td>{{$security->gm_srv1}}</td>
-                      <td>{{$security->gm_srv2}}</td>
-                      <td>{{$security->gm_srv3}}</td>
-                      <td>{{$security->gm_srv4}}</td>
+                      <td>{{$security->gm_srv1 == "1")?"Ya":"Tidak"}}</td>
+                      <td>{{$security->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
+                      <td>{{$security->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
+                      <td>{{$security->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
                       <td>{{$security->gm_klr}}</td>
                       <td><center><a href="{{route('scrt_upt', $security->id)}}" class="btn btn-sm btn-danger">
                       <i class="fa fa-door-open "></i></center></td>
