@@ -78,7 +78,7 @@ class GuestController extends Controller
     // return view ('guest.survey');
 
 
-   
+    
         public function guest_master()
         {
             $data ['gc'] = \DB::table('guest_master')->get();
