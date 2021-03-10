@@ -55,7 +55,7 @@ class GuestController extends Controller
         // dd($store);
         
         \DB::table('guest_master')->insert($store);
-        return view ('admin.guest_category.success'); 
+        return redirect()->back(); 
       
     }
     /* $store =[
