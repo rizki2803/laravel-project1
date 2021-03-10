@@ -16,10 +16,12 @@ use App\Http\Controllers\GuestController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/guest_master', 'GuestController@index');
-Route::get('/guest_receptionist', 'GuestController@receptionist');
-Route::get('/guest_security', 'GuestController@security');
+;
+Route::get('/survey/guest','GuestController@guest')->name('survey_store');
+Route::post('/survey/store','GuestController@store')->name('survey');
+Route::get('/guest_master', 'GuestController@index')->name('guest_master');
+Route::get('/guest_receptionist', 'GuestController@receptionist')->name('receptionist');
+Route::get('/guest_security', 'GuestController@security')->name('security');
 Route::get('/guest_category', 'GuestController@guest_cat');
 //Route::get('/guest_master', [GuestController::class, 'index']);
 
