@@ -32,24 +32,31 @@ class GuestController extends Controller
     }
     public function store(Request $request)
     {
-       
-       
+        // dd($request->all());
+        $gc = DB::table('guest_cat')->where('gc_tipe',$request->guestcategory)->first();
+        
         $store =[
             'id' => Uuid::uuid4(),
-            'gc_id' => $request->id,
+            'gc_id' => $gc->id,
             'gm_nama' => $request->nama,
             'gm_tlp' => $request->tlp,
             'gm_almt' => $request->alamat,
             'gm_inst' => $request->instansi,
-            'gpic_id' => $request->namapic,
-            'gm_wj' => $request->janji,
+            'gpic_id' => Uuid::uuid4(),
+            'gm_wj' => $request->jam,
             'gm_tjn' => $request->dtltujuan,
             'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
-            'gm_suhu' => $request->suhu
+            'gm_suhu' => $request->suhu,
+            'gm_srv1' => ($request->r1 == "Ya")?1:0,
+            'gm_srv2' => ($request->r2 == "YA")?1:0,
+            'gm_srv3' => ($request->r3 == "YA")?1:0,
+            'gm_srv4' => ($request->r4 == "YA")?1:0
         ];
-        dd($store);
-        \DB::table('survey')->insert();
-        return redictect('guest.survey');
+        // dd($store);
+        
+        \DB::table('guest_master')->insert($store);
+        return redirect()->back(); 
+      
     }
     /* $store =[
         'id'=>Uuid::uuid4(),

@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 ;
-Route::get('/survey/guest','GuestController@guest')->name('survey_store');
-Route::post('/survey/store','GuestController@store')->name('survey');
+Route::get('/survey/guest','GuestController@guest')->name('survey');
+Route::post('/survey/store','GuestController@store')->name('survey.store');
 Route::get('/guest_master', 'GuestController@index')->name('guest_master');
 
 Route::get('/guest_receptionist', 'GuestController@receptionist');
