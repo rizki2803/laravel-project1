@@ -143,11 +143,18 @@ class GuestController extends Controller
 
         public function receptionist()
         {
-            $data = Guest::get();
+            /*$data ['data'] = \DB::table('guest_master')
+            ->leftjoin('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
+            dd($data['data']);
+            */
+            $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+                    ->get();
+                    //dd($data2);
             return view('receptionist.index',[
                 'data'=>$data
             ]);
-            
         }
 
         public function security()
@@ -164,7 +171,9 @@ class GuestController extends Controller
             return view('security.index', $data);
             */
 
-            $data = Guest::get();
+            $data = Guest::select('*')
+            ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
             return view('security.index',[
                 'data'=>$data
             ]);
