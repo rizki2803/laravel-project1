@@ -77,12 +77,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <label>Pilih :</label><br>
                     <div class="form-group">
                       <div class="icheck-danger d-inline col-sm-6">
-                        <input type="radio" name="pil_aktif" id="pil_aktif" value="NO" checked>
+                        <input type="radio" name="pil_aktif" id="pil_aktif"  value="NO" checked>
                         <label for="pil_aktif"><b>Personal</b> </label>
                       </div>
                       <div class="icheck-danger d-inline col col-sm-6">
                         <input type="radio" name="pil_aktif" id="pil_aktif1" value="OK">
-                        <label for="pil_aktif1"><b>instansi</b></label>
+                        <label for="pil_aktif1"><b>Instansi</b></label>
                       </div>
                     </div>
                     <div class="form-group" id="ins">
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <input name="nama" type="text" class="form-control" required="required" placeholder="Enter ...">
                     </div>
                     <div class="form-group">
-                      <label>No telp</label>
+                      <label>No Telp</label>
                       <input name="tlp" type="text" class="form-control" required="required" placeholder="Enter ...">
                     </div>
                     <div class="form-group">
@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-clock"></i></span>
                         </div>
-                        <input name="jam" type="time" class="form-control float-right" id="reservation">
+                        <input name="jam" type="time" class="form-control float-right" required="required" id="reservation">
                       </div><br>
                       <div class="form-group">
                         <label>Detail Tujuan</label>
@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label>Kondisi Tubuh :</label><br>
                         <label>Apakah anda sedang sakit?</label><br>
                         <div class="icheck-danger d-inline col-3">
-                          <input type="radio" name="r1" value="Ya" id="radioDanger1">
+                          <input type="radio" name="r1" value="Ya" required="required" id="radioDanger1">
                           <label for="radioDanger2">
                             YA
                           </label>
@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <br><label>Apakah anda mengalami batuk dalam 3 hari terakhir ?</label><br>
                         <div class="form-group clearfix">
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r2" value="Ya" id="radioDanger1">
+                            <input type="radio" name="r2" value="Ya" required="required" id="radioDanger1">
                             <label for="radioDanger1">
                               YA
                             </label>
@@ -167,7 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </div><br>
                           <label>Apakah anda mengalami sakit tenggorokan dalam 3 hari terakhir ?</label><br>
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r3" value="Ya" id="radioDanger1">
+                            <input type="radio" name="r3" value="Ya" required="required" id="radioDanger1">
                             <label for="radioDanger1">
                               YA
                             </label>
@@ -180,9 +180,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </div>
                           <div class="form-group clearfix">
 
-                            <label>apakah indra penciuman anda sedang tidak normal dalam 3 hari terakhir ?</label><br>
+                            <label>Apakah indra penciuman anda sedang tidak normal dalam 3 hari terakhir ?</label><br>
                             <div class="icheck-danger d-inline col-3">
-                              <input type="radio" name="r4" value="Ya" id="radioDanger1">
+                              <input type="radio" name="r4" value="Ya" required="required" id="radioDanger1">
                               <label for="radioDanger1">
                                 YA
                               </label>

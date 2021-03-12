@@ -29,7 +29,7 @@
                       <th>Detail Tujuan</th>
                       <th>Jam Kedatangan</th>
                       <th>Suhu Tubuh</th>
-                      <th>Sehat</th>
+                      <th>Sakit</th>
                       <th>Batuk</th>
                       <th>Sakit Tenggorokan</th>
                       <th>Gangguan Penciuman</th>
