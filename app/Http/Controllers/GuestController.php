@@ -183,17 +183,7 @@ class GuestController extends Controller
             ]);
         }
 
-        return redirect()->back();
-    }
-    //---------------------------CATEGORY
-
-    public function receptionist()
-    {
-        $data = Guest::get();
-        return view('receptionist.index', [
-            'data' => $data
-        ]);
-    }
+       
 
     public function security()
     {
