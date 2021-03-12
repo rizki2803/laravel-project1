@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group" id="form_instansi">
                       <label>Nama Instansi</label>
-                      <input id="instansi" name="nama_aktif" type="text" class="form-control"  placeholder="Enter ...">
+                      <input id="instansi" name="nama_aktif" type="text" class="form-control" placeholder="Enter ...">
                     </div>
                     <div class="form-group">
                       <label>Tujuan :</label><br>
@@ -140,13 +140,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label>Kondisi Tubuh :</label><br>
                         <label>Apakah anda sedang sakit?</label><br>
                         <div class="icheck-danger d-inline col-3">
-                          <input type="radio" name="r1" value ="Ya" id="radioDanger1">
+                          <input type="radio" name="r1" value="Ya" id="radioDanger1">
                           <label for="radioDanger2">
                             YA
                           </label>
                         </div>
                         <div class="icheck-danger d-inline ">
-                          <input type="radio" name="r1" value ="tidak" id="radioDanger2">
+                          <input type="radio" name="r1" value="tidak" id="radioDanger2">
                           <label for="radioDanger2">
                             Tidak
                           </label>
@@ -154,41 +154,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <br><label>Apakah anda mengalami batuk dalam 3 hari terakhir ?</label><br>
                         <div class="form-group clearfix">
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r2" value ="Ya" id="radioDanger1">
+                            <input type="radio" name="r2" value="Ya" id="radioDanger1">
                             <label for="radioDanger1">
                               YA
                             </label>
                           </div>
                           <div class="icheck-danger d-inline col-6">
-                            <input type="radio" name="r2" value ="tidak" id="radioDanger2">
+                            <input type="radio" name="r2" value="tidak" id="radioDanger2">
                             <label for="radioDanger2">
                               Tidak
                             </label>
                           </div><br>
                           <label>Apakah anda mengalami sakit tenggorokan dalam 3 hari terakhir ?</label><br>
                           <div class="icheck-danger d-inline col-3">
-                            <input type="radio" name="r3" value ="Ya" id="radioDanger1">
+                            <input type="radio" name="r3" value="Ya" id="radioDanger1">
                             <label for="radioDanger1">
                               YA
                             </label>
                           </div>
                           <div class="icheck-danger d-inline col-6">
-                            <input type="radio" name="r3"  value ="tidak" id="radioDanger2">
+                            <input type="radio" name="r3" value="tidak" id="radioDanger2">
                             <label for="radioDanger2">
                               Tidak
                             </label>
                           </div>
                           <div class="form-group clearfix">
-                            
+
                             <label>apakah indra penciuman anda sedang tidak normal dalam 3 hari terakhir ?</label><br>
                             <div class="icheck-danger d-inline col-3">
-                              <input type="radio" name="r4" value ="Ya" id="radioDanger1">
+                              <input type="radio" name="r4" value="Ya" id="radioDanger1">
                               <label for="radioDanger1">
                                 YA
                               </label>
                             </div>
                             <div class="icheck-danger d-inline col-6">
-                              <input type="radio" name="r4" value ="tidak" id="radioDanger2">
+                              <input type="radio" name="r4" value="tidak" id="radioDanger2">
                               <label for="radioDanger2">
                                 Tidak
                               </label>
@@ -198,7 +198,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- /.input group -->
                           </div>
                           <!-- /.card-body -->
-
 
                           <input type="submit" class="btn btn-primary" value="submit">
 
@@ -246,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         // var aktif = $("input[name='nama_instansi']:checked").val();
         var Instansi = $("input[name='pil_aktif']:checked").val();
-        
+
         if (Instansi == 'NO') {
           // console.log(Instansi);
           $('#nama_instansi').val("");
