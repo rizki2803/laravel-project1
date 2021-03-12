@@ -27,7 +27,7 @@
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example2" class="table table-bordered table-hover">
+                    <table id="example2" class="table table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th>#</th>

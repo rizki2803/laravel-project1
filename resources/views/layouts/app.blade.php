@@ -19,16 +19,11 @@
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.css">
-  <!-- date-range-picker -->
-  <script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- jQuery -->
   <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
   <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
@@ -45,8 +40,9 @@
     $("#example2").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["excel", "pdf"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
+    })
+    .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  })
 </script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" style="min-height: 100%;">

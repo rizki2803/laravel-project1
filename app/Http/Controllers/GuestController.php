@@ -105,6 +105,27 @@ class GuestController extends Controller
     // return view ('guest.survey');
 
 
+<<<<<<< HEAD
+=======
+    
+        public function guest_master()
+        {
+            $data = Guest::select('*')
+            ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
+            return view('admin.guest_master.index', [
+                'data'=>$data
+            ]);
+            
+        }
+        public function guest_cat()
+        {
+            $data ['gc'] = \DB::table('guest_cat')->get();
+            //$data ['gm'] = \DB::table('guest_master')->select('gm_nama')->first();
+            //$data ['gc'] = GuestCategory::all();
+            return view('admin.guest_category.index', $data);
+        }
+>>>>>>> 09efb61435171ca4dcffe0fc759a708e8e6be4f3
 
     public function guest_master()
     {
@@ -162,6 +183,29 @@ class GuestController extends Controller
         /*return $id;
             $del_id = GuestCategory::find($id)->delete();
             if($del_id){}*/
+<<<<<<< HEAD
+=======
+                
+            return redirect()->back();   
+        }
+        //---------------------------CATEGORY
+
+        public function receptionist()
+        {
+            /*$data ['data'] = \DB::table('guest_master')
+            ->leftjoin('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
+            dd($data['data']);
+            */
+            $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+                    ->get();
+                    //dd($data2);
+            return view('receptionist.index',[
+                'data'=>$data
+            ]);
+        }
+>>>>>>> 09efb61435171ca4dcffe0fc759a708e8e6be4f3
 
         return redirect()->back();
     }
@@ -189,6 +233,7 @@ class GuestController extends Controller
             return view('security.index', $data);
             */
 
+<<<<<<< HEAD
         $data = Guest::get();
         return view('security.index', [
             'data' => $data
@@ -204,4 +249,25 @@ class GuestController extends Controller
         dd($a);
         return redirect()->back();
     }
+=======
+            $data = Guest::select('*')
+            ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
+            return view('security.index',[
+                'data'=>$data
+            ]);
+        }
+
+        public function security_upt($id)
+        {
+            
+            $data = \DB::table('guest_master')->where('id', $id)->first();
+            
+            /*->insert([
+                'gm_klr' => Carbon::now()
+                ]);*/
+                dd($data);
+            return redirect()->back();   
+        }
+>>>>>>> 09efb61435171ca4dcffe0fc759a708e8e6be4f3
 }

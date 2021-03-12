@@ -34,7 +34,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
@@ -46,14 +45,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
-<script>
-  $(function () {
-    $("#table").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["excel", "pdf"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
-</script>
 </head>
 <body class="hold-transition layout-top-nav layout-footer-fixed" >
 
