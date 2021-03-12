@@ -15,7 +15,7 @@ class CreateGuestMasterTable extends Migration
     public function up()
     {
         Schema::create('guest_master', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('gm_id')->primary();
             $table->uuid('gc_id');
             $table->string('gm_nama')->nullable();
             $table->string('gm_tlp')->nullable();

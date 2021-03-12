@@ -12,15 +12,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <label for="filter-periode"> Filter Berdasarkan Periode : </label> 
-            <select name="filter_periode" id="filter_periode" class="col-2 form-control">
-              <option value=""> Pilih Periode </option>
-              <option value="7"> 7 Hari Terakhir </option>
-              <option value="14"> 14 Hari Terakhir </option>
-              <option value="21"> 21 Hari Terakhir </option>
-              <option value="31"> 31 Hari Terakhir </option>
-              <option value="365"> 365 Hari Terakhir </option>
-            </select>
+            
             <div class="row">
               <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
@@ -66,9 +58,9 @@
                       <td>{{($security->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
                       <td>{{($security->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
                       <td>{{($security->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
-                      <td>{{($security->gm_klr == "")?"Belum Keluar":""}}</td>
+                      <td>{{($security->gm_klr == "")?"Belum Keluar":$security->gm_klr}}</td>
                       <td>
-                        <center><a href="{{route('scrt_upt', $security->id)}}" class="btn btn-sm btn-danger">
+                        <center><a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
                             <i class="fa fa-door-open "></i></a></center>
                       </td>
                     </tr>

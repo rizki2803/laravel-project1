@@ -90,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="form-group">
                         <div class="form-line">
                           <label>Kategori Tamu</label>
-                          {{Form::select('guestcategory', $gc,null, ['class'=>'form-control ','id'=>'tamu'])}}
+                          {{Form::select('guestcategory', $gc, null, ['class'=>'form-control ','id'=>'tamu'])}}
                         </div>
                       </div>
                     </div>

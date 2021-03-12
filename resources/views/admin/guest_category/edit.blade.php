@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         
-                        <form method="get" action="/guest_category/upt/{{$gc->id}}" enctype="multipart/form-data">
+                        <form method="get" action="/guest_category/upt/{{$gc->gc_id}}" enctype="multipart/form-data">
         
                             <input type="category" value="{{ $gc->gc_tipe }}" class="form-control" name="gc_tipe">
                             

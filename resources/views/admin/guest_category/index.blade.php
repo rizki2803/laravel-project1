@@ -45,10 +45,10 @@
                       <td>{{$no++}}</td>
                         <td>{{$category->gc_tipe}}</td>
                         <td>
-                        <a href="{{route('gc_edit',$category->id)}}" class="btn btn-sm btn-warning">
+                        <a href="{{route('gc_edit',$category->gc_id)}}" class="btn btn-sm btn-warning">
                           <i class="fa fa-edit "></i>
                         </a>
-                        <a href="{{route('gc_del',$category->id)}}" class="btn btn-sm btn-danger">
+                        <a href="{{route('gc_del',$category->gc_id)}}" class="btn btn-sm btn-danger">
                           <i class="fa fa-trash-alt "></i>
                         </a> 
                     </td>
