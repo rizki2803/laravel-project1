@@ -48,7 +48,7 @@
                       <td>{{$security->gm_nama}}</td>
                       <td>{{$security->gm_tlp}}</td>
                       <td>{{$security->gm_almt}}</td>
-                      <td>{{($security->gm_inst == "")?"Personal":""}}</td>
+                      <td>{{($security->gm_inst == "")?"Personal":$security->gm_inst}}</td>
                       <td>{{$security->gpic_id}}</td>
                       <td>{{$security->gm_wj}}</td>
                       <td>{{$security->gm_tjn}}</td>

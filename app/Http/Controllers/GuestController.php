@@ -54,8 +54,8 @@ class GuestController extends Controller
         ];
 
 
-        dd($store);
-        //   \DB::table('guest_master')->insert($store);
+        // dd($store);
+         \DB::table('guest_master')->insert($store);
         if ($store) {
             Alert::success('Success Title', 'Data berhasil diisi');
         } else {

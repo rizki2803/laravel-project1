@@ -55,7 +55,7 @@
                   <td>{{$guest_master->gm_nama}}</td>
                   <td>{{$guest_master->gm_tlp}}</td>
                   <td>{{$guest_master->gm_almt}}</td>
-                  <td>{{($guest_master->gm_inst == "")?"Personal":""}}</td>
+                  <td>{{($guest_master->gm_inst == "")?"Personal":$guest_master->gm_inst}}</td>
                   <td>{{$guest_master->gpic_id}}</td>
                   <td>{{$guest_master->gm_wj}}</td>
                   <td>{{$guest_master->gm_tjn}}</td>
@@ -65,7 +65,7 @@
                   <td>{{($guest_master->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
-                  <td>{{($guest_master->gm_klr == "")?"Belum Keluar":""}}</td>
+                  <td>{{($guest_master->gm_klr == "")?"Belum Keluar":$guest_master->gm_klr}}</td>
                 </tr>
                 @endforeach
               </tbody>
