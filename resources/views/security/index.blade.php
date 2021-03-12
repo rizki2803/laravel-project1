@@ -12,7 +12,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            
+
             <div class="row">
               <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
@@ -60,8 +60,15 @@
                       <td>{{($security->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
                       <td>{{($security->gm_klr == "")?"Belum Keluar":$security->gm_klr}}</td>
                       <td>
-                        <center><a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
-                            <i class="fa fa-door-open "></i></a></center>
+                          
+                          @if ($security->gm_klr == "")
+                          <center>
+                            <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
+                              <i class="fa fa-door-open "></i>
+                            </a>
+                          </center>
+                          @endif
+                          
                       </td>
                     </tr>
                     @endforeach
@@ -76,10 +83,12 @@
   </div>
 </section>
 <script>
-  $(function () {
-    $("#example2").DataTable
-    ({"responsive": true, "lengthChange": false, "autoWidth": true,
+  $(function() {
+    $("#example2").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": true,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-    })
+  })
 </script>
 @endsection
