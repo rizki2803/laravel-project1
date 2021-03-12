@@ -36,8 +36,8 @@ class GuestController extends Controller
         $gc = DB::table('guest_cat')->where('gc_tipe', $request->guestcategory)->first();
 
         $store = [
-            'id' => Uuid::uuid4(),
-            'gc_id' => $gc->id,
+            'gm_id' => Uuid::uuid4(),
+            'gc_id' => $gc->gc_id,
             'gm_nama' => $request->nama,
             'gm_tlp' => $request->tlp,
             'gm_almt' => $request->alamat,
@@ -105,16 +105,19 @@ class GuestController extends Controller
     // return view ('guest.survey');
 
 
-
+//---------------------------ADMIN GUEST MASTER----------------------------------------------
     public function guest_master()
     {
         $data = Guest::select('*')
-        ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+        ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
         ->get();
         return view('admin.guest_master.index', [
             'data'=>$data
         ]);
     }
+//END---------------------------ADMIN GUEST MASTER----------------------------------------------
+
+//---------------------------CATEGORY----------------------------------------------    
     public function guest_cat()
     {
         $data['gc'] = \DB::table('guest_cat')->get();
@@ -132,7 +135,7 @@ class GuestController extends Controller
     public function guest_cat_crt(Request $request)
     {
         $store = [
-            'id' => Uuid::uuid4(),
+            'gc_id' => Uuid::uuid4(),
             'gc_tipe' => $request->gc_tipe,
         ];
 
@@ -142,7 +145,7 @@ class GuestController extends Controller
 
     public function guest_cat_edit($id)
     {
-        $tipe['gc'] = \DB::table('guest_cat')->where('id', $id)->first();
+        $tipe ['gc'] = \DB::table('guest_cat')->where('gc_id', $id)->first();
 
         return view('admin.guest_category.edit', $tipe);
     }
@@ -154,14 +157,14 @@ class GuestController extends Controller
             'gc_tipe' => $request->gc_tipe
         ];
 
-        \DB::table('guest_cat')->where('id', $id)->update($store);
+        \DB::table('guest_cat')->where('gc_id', $id)->update($store);
         return view('admin.guest_category.success');
     }
 
     public function guest_cat_del($id)
     {
 
-        $a = \DB::table('guest_cat')->where('id', $id)->delete();
+        $a = \DB::table('guest_cat')->where('gc_id', $id)->delete();
 
         /*return $id;
             $del_id = GuestCategory::find($id)->delete();
@@ -169,8 +172,9 @@ class GuestController extends Controller
                 
             return redirect()->back();   
         }
-        //---------------------------CATEGORY
+//END---------------------------CATEGORY----------------------------------------------
 
+//---------------------------RECEPTIONIST----------------------------------------------
         public function receptionist()
         {
             /*$data ['data'] = \DB::table('guest_master')
@@ -179,47 +183,57 @@ class GuestController extends Controller
             dd($data['data']);
             */
             $data = Guest::select('*')
-                    ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
                     ->get();
                     //dd($data2);
             return view('receptionist.index',[
                 'data'=>$data
             ]);
         }
-
+//END---------------------------RECEPTIONIST----------------------------------------------
        
-
+//---------------------------SECURITY----------------------------------------------
     public function security()
     {
-        /*$data['data'] = \DB::table('guest_master')
-            ->leftjoin('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-            ->get();
-
-            $data2 = \DB::table('guest_cat')
-            ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
-            ->get();
-            dd($data['data'], $data2);
-
-            return view('security.index', $data);
-            */
-
+        
+            /*
             $data = Guest::select('*')
             ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
             ->get();
             return view('security.index',[
                 'data'=>$data
             ]);
+            */
+
+                $data ['data'] = \DB::table('guest_master')
+                                ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')
+                                //->select('guest_master.id' ,'guest_cat.gc_tipe','guest_mstr.gm_nama')
+                                ->get();
+                return view ('security.index', $data);
+
         }
 
         public function security_upt($id)
         {
             
-            $data = \DB::table('guest_master')->where('id', $id)->first();
-            
-            /*->insert([
-                'gm_klr' => Carbon::now()
-                ]);*/
-                dd($data);
+            $store = [
+                'gm_klr' => Carbon::now()->setTimezone('asia/jakarta')
+            ];
+    
+            \DB::table('guest_master')->where('gm_id', $id)->update($store);                
             return redirect()->back();   
         }
+//END---------------------------SECURITY----------------------------------------------
+
+    public function try()
+    {
+        
+        $a = \DB::table('guest_master')
+                ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')
+                ->get();
+
+            echo $a;
+    }
+
+
 }
