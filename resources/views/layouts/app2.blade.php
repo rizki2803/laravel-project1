@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="{{asset('assets')}}/index3.html" class="navbar-brand">
+      <a href="https://hariff.co.id/" class="navbar-brand">
         <img src="{{asset('img')}}/HariffLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>
