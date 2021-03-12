@@ -41,7 +41,7 @@ class GuestController extends Controller
             'gm_nama' => $request->nama,
             'gm_tlp' => $request->tlp,
             'gm_almt' => $request->alamat,
-            'gm_inst' => $request->instansi,
+            'gm_inst' => $request->nama_aktif,
             'gpic_id' => Uuid::uuid4(),
             'gm_wj' => $request->jam,
             'gm_tjn' => $request->dtltujuan,
@@ -54,8 +54,8 @@ class GuestController extends Controller
         ];
 
 
-        //  dd($store);
-        \DB::table('guest_master')->insert($store);
+        dd($store);
+        //   \DB::table('guest_master')->insert($store);
         if ($store) {
             Alert::success('Success Title', 'Data berhasil diisi');
         } else {
