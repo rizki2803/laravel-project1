@@ -33,9 +33,9 @@ class GuestController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $gc = DB::table('guest_cat')->where('gc_tipe',$request->guestcategory)->first();
-        
-        $store =[
+        $gc = DB::table('guest_cat')->where('gc_tipe', $request->guestcategory)->first();
+
+        $store = [
             'id' => Uuid::uuid4(),
             'gc_id' => $gc->id,
             'gm_nama' => $request->nama,
@@ -47,16 +47,36 @@ class GuestController extends Controller
             'gm_tjn' => $request->dtltujuan,
             'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
             'gm_suhu' => $request->suhu,
-            'gm_srv1' => ($request->r1 == "Ya")?1:0,
-            'gm_srv2' => ($request->r2 == "Ya")?1:0,
-            'gm_srv3' => ($request->r3 == "Ya")?1:0,
-            'gm_srv4' => ($request->r4 == "Ya")?1:0
+            'gm_srv1' => ($request->r1 == "Ya") ? 1 : 0,
+            'gm_srv2' => ($request->r2 == "Ya") ? 1 : 0,
+            'gm_srv3' => ($request->r3 == "Ya") ? 1 : 0,
+            'gm_srv4' => ($request->r4 == "Ya") ? 1 : 0
         ];
-        // dd($store);
-        
+
+
+        //  dd($store);
         \DB::table('guest_master')->insert($store);
-        return redirect()->back(); 
-      
+        if ($store) {
+            Alert::success('Success Title', 'Data berhasil diisi');
+        } else {
+            Alert::error('Error Title', 'Data yang diisi mungkin belum sesuai atau ada yang masih kosong!');
+        }
+
+        return back();
+
+        // return redirect()->back();
+        /* $validator = $this->validate($request, [
+            'gm_nama' => 'required|min:3',
+            'gm_tlp'  =>'required|min:3'
+          
+         ]);
+         dd($validator);
+        if ($this->fails()) {
+
+            return back()->with('toast_error', $this->messages()->all()[0])->withInput();
+        }
+        $task = Guest::create($request->all());
+        return redirect()->back()-> with('toast_success', 'Task Created Successfully!');*/
     }
     /* $store =[
         'id'=>Uuid::uuid4(),
@@ -85,81 +105,79 @@ class GuestController extends Controller
     // return view ('guest.survey');
 
 
-    
-        public function guest_master()
-        {
-            $data ['gc'] = \DB::table('guest_master')->get();
-            return view('admin.guest_master.index', $data);
-            
-        }
-        public function guest_cat()
-        {
-            $data ['gc'] = \DB::table('guest_cat')->get();
-            //$data ['gm'] = \DB::table('guest_master')->select('gm_nama')->first();
-            //$data ['gc'] = GuestCategory::all();
-            return view('admin.guest_category.index', $data);
-        }
 
-        public function guest_cat_form()
-        {
+    public function guest_master()
+    {
+        $data['gc'] = \DB::table('guest_master')->get();
+        return view('admin.guest_master.index', $data);
+    }
+    public function guest_cat()
+    {
+        $data['gc'] = \DB::table('guest_cat')->get();
+        //$data ['gm'] = \DB::table('guest_master')->select('gm_nama')->first();
+        //$data ['gc'] = GuestCategory::all();
+        return view('admin.guest_category.index', $data);
+    }
 
-            return view ('admin.guest_category.form'); 
-        }
+    public function guest_cat_form()
+    {
 
-        public function guest_cat_crt(Request $request)
-        {
-            $store = [
-                'id' => Uuid::uuid4(),
-                'gc_tipe' => $request->gc_tipe,
-            ];
-            
-            \DB::table('guest_cat')->insert($store);
-            return view ('admin.guest_category.success'); 
-        }
+        return view('admin.guest_category.form');
+    }
 
-        public function guest_cat_edit($id)
-        {
-            $tipe ['gc'] = \DB::table('guest_cat')->where('id',$id)->first();
+    public function guest_cat_crt(Request $request)
+    {
+        $store = [
+            'id' => Uuid::uuid4(),
+            'gc_tipe' => $request->gc_tipe,
+        ];
 
-            return view ('admin.guest_category.edit', $tipe);
-        }
+        \DB::table('guest_cat')->insert($store);
+        return view('admin.guest_category.success');
+    }
 
-        public function guest_cat_upt(Request $request, $id)
-        {
-            $store = [
-                //'id' => Uuid::uuid4(),
-                'gc_tipe' => $request->gc_tipe
-            ];
+    public function guest_cat_edit($id)
+    {
+        $tipe['gc'] = \DB::table('guest_cat')->where('id', $id)->first();
 
-            \DB::table('guest_cat')->where('id', $id)->update($store);
-            return view ('admin.guest_category.success'); 
-        }
+        return view('admin.guest_category.edit', $tipe);
+    }
 
-        public function guest_cat_del($id)
-        {
-            
-            $a = \DB::table('guest_cat')->where('id', $id)->delete();
-            
-            /*return $id;
+    public function guest_cat_upt(Request $request, $id)
+    {
+        $store = [
+            //'id' => Uuid::uuid4(),
+            'gc_tipe' => $request->gc_tipe
+        ];
+
+        \DB::table('guest_cat')->where('id', $id)->update($store);
+        return view('admin.guest_category.success');
+    }
+
+    public function guest_cat_del($id)
+    {
+
+        $a = \DB::table('guest_cat')->where('id', $id)->delete();
+
+        /*return $id;
             $del_id = GuestCategory::find($id)->delete();
             if($del_id){}*/
-                
-            return redirect()->back();   
-        }
-        //---------------------------CATEGORY
 
-        public function receptionist()
-        {
-            $data = Guest::get();
-            return view('receptionist.index',[
-                'data'=>$data
-            ]);
-            
-        }
+        return redirect()->back();
+    }
+    //---------------------------CATEGORY
 
-        public function security()
-        {
-            /*$data['data'] = \DB::table('guest_master')
+    public function receptionist()
+    {
+        $data = Guest::get();
+        return view('receptionist.index', [
+            'data' => $data
+        ]);
+    }
+
+    public function security()
+    {
+        /*$data['data'] = \DB::table('guest_master')
             ->leftjoin('guest_cat', 'guest_cat.gc_id','=', 'guest_master.id')
             ->get();
 
@@ -171,19 +189,19 @@ class GuestController extends Controller
             return view('security.index', $data);
             */
 
-            $data = Guest::get();
-            return view('security.index',[
-                'data'=>$data
-            ]);
-        }
+        $data = Guest::get();
+        return view('security.index', [
+            'data' => $data
+        ]);
+    }
 
-        public function security_upt($id)
-        {
-            $a = \DB::table('guest_master')->where('id', $id)->first();
-            /*->insert([
+    public function security_upt($id)
+    {
+        $a = \DB::table('guest_master')->where('id', $id)->first();
+        /*->insert([
                 'gm_klr' => Carbon::now()
                 ]);*/
-                dd($a);
-            return redirect()->back();   
-        }
+        dd($a);
+        return redirect()->back();
+    }
 }
