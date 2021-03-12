@@ -35,15 +35,7 @@
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
-<script>
-  $(function () {
-    $("#example2").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["excel", "pdf"]
-    })
-    .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  })
-</script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" style="min-height: 100%;">
 

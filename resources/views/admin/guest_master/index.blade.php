@@ -81,4 +81,12 @@
   <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+<script>
+  $(function () {
+    $("#example2").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+    })
+    .buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+  })
+</script>
 @endsection
