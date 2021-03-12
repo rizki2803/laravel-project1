@@ -88,8 +88,12 @@ class GuestController extends Controller
     
         public function guest_master()
         {
-            $data ['gc'] = \DB::table('guest_master')->get();
-            return view('admin.guest_master.index', $data);
+            $data = Guest::select('*')
+            ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+            ->get();
+            return view('admin.guest_master.index', [
+                'data'=>$data
+            ]);
             
         }
         public function guest_cat()
@@ -188,11 +192,13 @@ class GuestController extends Controller
 
         public function security_upt($id)
         {
-            $a = \DB::table('guest_master')->where('id', $id)->first();
+            
+            $data = \DB::table('guest_master')->where('id', $id)->first();
+            
             /*->insert([
                 'gm_klr' => Carbon::now()
                 ]);*/
-                dd($a);
+                dd($data);
             return redirect()->back();   
         }
 }

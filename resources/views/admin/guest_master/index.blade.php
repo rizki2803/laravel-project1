@@ -23,7 +23,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover table-responsive">
+            <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
               <thead>
                 <tr>
                   <th>#</th>
@@ -48,14 +48,14 @@
                 @php
                 $no=1;
                 @endphp
-                @foreach($gc as $guest_master)
+                @foreach($data as $guest_master)
                 <tr>
                   <td>{{$no++}}</td>
-                  <td>{{$guest_master->gc_id}}</td>
+                  <td>{{$guest_master->gc_tipe}}</td>
                   <td>{{$guest_master->gm_nama}}</td>
                   <td>{{$guest_master->gm_tlp}}</td>
                   <td>{{$guest_master->gm_almt}}</td>
-                  <td>{{$guest_master->gm_inst}}</td>
+                  <td>{{($guest_master->gm_inst == "")?"Personal":""}}</td>
                   <td>{{$guest_master->gpic_id}}</td>
                   <td>{{$guest_master->gm_wj}}</td>
                   <td>{{$guest_master->gm_tjn}}</td>
@@ -65,7 +65,7 @@
                   <td>{{($guest_master->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
-                  <td>{{$guest_master->gm_klr}}</td>
+                  <td>{{($guest_master->gm_klr == "")?"Belum Keluar":""}}</td>
                 </tr>
                 @endforeach
               </tbody>

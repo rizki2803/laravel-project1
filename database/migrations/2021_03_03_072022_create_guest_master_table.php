@@ -24,7 +24,7 @@ class CreateGuestMasterTable extends Migration
             $table->uuid('gpic_id');            
             $table->time('gm_wj')->nullable();
             $table->string('gm_tjn')->nullable();
-            $table->time('gm_jd')->nullable();
+            $table->datetime('gm_jd')->nullable();
             $table->float('gm_suhu')->nullable();
             $table->boolean('gm_srv1')->nullable();
             $table->boolean('gm_srv2')->nullable();
