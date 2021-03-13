@@ -1,29 +1,19 @@
 @extends('layouts.app')
 @section('content')
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6 text-light">
-        <h1>DataTables</h1>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
-
 <!-- Main content -->
+</br>
 <section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data Category</h3>
+            <h3 class="card-title">Data Guest</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
+            <table id="example2" class="table table-bordered table-striped table-responsive text-nowrap">
               <thead>
                 <tr>
                   <th>#</th>
@@ -82,11 +72,12 @@
 </section>
 <!-- /.content -->
 <script>
-  $(function () {
+  $(function() {
     $("#example2").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    })
-    .buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
+    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
   })
 </script>
 @endsection
