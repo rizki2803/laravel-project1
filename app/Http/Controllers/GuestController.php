@@ -68,7 +68,7 @@ class GuestController extends Controller
         /* $validator = $this->validate($request, [
             'gm_nama' => 'required|min:3',
             'gm_tlp'  =>'required|min:3'
-          
+
          ]);
          dd($validator);
         if ($this->fails()) {
@@ -85,7 +85,7 @@ class GuestController extends Controller
         'gm_tlp'=>'123123',
         'gm_almt'=>'alamat',
         'gm_inst'=>'instansi',
-        'gpic_id'=>Uuid::uuid4(),            
+        'gpic_id'=>Uuid::uuid4(),
         'gm_wj'=>Carbon::now(),
         'gm_tjn'=>'tujuan',
         'gm_jd'=>Carbon::now(),
@@ -117,7 +117,7 @@ class GuestController extends Controller
     }
 //END---------------------------ADMIN GUEST MASTER----------------------------------------------
 
-//---------------------------CATEGORY----------------------------------------------    
+//---------------------------CATEGORY----------------------------------------------
     public function guest_cat()
     {
         $data['gc'] = \DB::table('guest_cat')->get();
@@ -126,10 +126,9 @@ class GuestController extends Controller
         return view('admin.guest_category.index', $data);
     }
 
-    public function guest_cat_form()
+    public function guest_cat_store()
     {
-
-        return view('admin.guest_category.form');
+        return view('admin.guest_category.store');
     }
 
     public function guest_cat_crt(Request $request)
@@ -140,7 +139,7 @@ class GuestController extends Controller
         ];
 
         \DB::table('guest_cat')->insert($store);
-        return view('admin.guest_category.success');
+        return redirect()->route('gc_get')->with(['success' => 'Update Berhasil']);
     }
 
     public function guest_cat_edit($id)
@@ -158,7 +157,7 @@ class GuestController extends Controller
         ];
 
         \DB::table('guest_cat')->where('gc_id', $id)->update($store);
-        return view('admin.guest_category.success');
+        return redirect()->route('gc_get')->with(['success' => 'Update Berhasil']);
     }
 
     public function guest_cat_del($id)
@@ -169,8 +168,8 @@ class GuestController extends Controller
         /*return $id;
             $del_id = GuestCategory::find($id)->delete();
             if($del_id){}*/
-                
-            return redirect()->back();   
+
+            return redirect()->back();
         }
 //END---------------------------CATEGORY----------------------------------------------
 
@@ -191,11 +190,11 @@ class GuestController extends Controller
             ]);
         }
 //END---------------------------RECEPTIONIST----------------------------------------------
-       
+
 //---------------------------SECURITY----------------------------------------------
     public function security()
     {
-        
+
             /*
             $data = Guest::select('*')
             ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
@@ -215,19 +214,19 @@ class GuestController extends Controller
 
         public function security_upt($id)
         {
-            
+
             $store = [
                 'gm_klr' => Carbon::now()->setTimezone('asia/jakarta')
             ];
-    
-            \DB::table('guest_master')->where('gm_id', $id)->update($store);                
-            return redirect()->back();   
+
+            \DB::table('guest_master')->where('gm_id', $id)->update($store);
+            return redirect()->back();
         }
 //END---------------------------SECURITY----------------------------------------------
 
     public function try()
     {
-        
+
         $a = \DB::table('guest_master')
                 ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')
                 ->get();

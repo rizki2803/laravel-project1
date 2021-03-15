@@ -33,9 +33,9 @@ Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get');
 
 Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
 Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
-Route::get('/guest_category/form', 'GuestController@guest_cat_form')->name('gc_form');
+Route::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');
 Route::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');
-Route::get('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
+Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
 Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
 
 //Route::get('/guest_master', [GuestController::class, 'index']);

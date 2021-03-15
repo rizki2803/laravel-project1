@@ -4,13 +4,19 @@
 </br>
         <!-- Main content -->
         <section class="content">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
         <div class="container-fluid">
             <div class="row">
             <div class="col-12">
                 <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Category</h3>
-                    <a href="{{route('gc_form')}}" class="float-sm-right btn btn-xs btn-primary">
+                    <a href="{{route('gc_store')}}" class="float-sm-right btn btn-xs btn-primary">
                           <i class="fa fa-plus"></i>
                     </a>
                     </div>
@@ -22,7 +28,7 @@
                         <th>#</th>
                         <th>Guest Category</th>
                         <th>Action</th>
-                        
+
                     </tr>
                     </thead>
                     <tbody>
@@ -39,7 +45,7 @@
                         </a>
                         <a href="{{route('gc_del',$category->gc_id)}}" class="btn btn-sm btn-danger">
                           <i class="fa fa-trash-alt "></i>
-                        </a> 
+                        </a>
                     </td>
                     </tr>
                     @endforeach

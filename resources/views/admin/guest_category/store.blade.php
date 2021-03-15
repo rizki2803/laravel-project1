@@ -5,7 +5,7 @@
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          
+
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -25,10 +25,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="row mb-2">
-                        {{ Form::open(['action' => 'GuestController@guest_cat_crt', 'method' => 'POST']) }}
-                            {{ Form::text('gc_tipe')}}
-                            {{ Form::submit('Submit') }}
-                        {{ Form::close() }}
+                        @include('admin.guest_category.form')
                     </div>
                 </div>
                 <!-- /.card-body -->

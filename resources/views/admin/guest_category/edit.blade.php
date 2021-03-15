@@ -5,7 +5,7 @@
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          
+
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -25,13 +25,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="row mb-2">
-                        
-                        <form method="get" action="/guest_category/upt/{{$gc->gc_id}}" enctype="multipart/form-data">
-        
-                            <input type="category" value="{{ $gc->gc_tipe }}" class="form-control" name="gc_tipe">
-                            
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        @include('admin.guest_category.form')
                     </div>
                 </div>
                 <!-- /.card-body -->
