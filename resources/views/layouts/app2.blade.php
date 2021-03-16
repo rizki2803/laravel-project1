@@ -41,8 +41,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('assets')}}/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="{{asset('assets')}}/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
 </head>
@@ -53,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="{{asset('assets')}}/index3.html" class="navbar-brand">
+      <a href="https://hariff.co.id/" class="navbar-brand">
         <img src="{{asset('img')}}/HariffLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>

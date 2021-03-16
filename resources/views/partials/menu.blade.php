@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{asset('assets')}}/index3.html" class="brand-link">
+    <a href="https://hariff.co.id/" class="brand-link">
       <img src="{{asset('img')}}/HariffLogo1.jpeg" alt="Pt.HariffDTE Logo" class="brand-image img-circle elevation-3" >
       <span class="brand-text font-weight-light">PT. Hariff DTE</span>
     </a>

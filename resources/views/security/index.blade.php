@@ -86,7 +86,7 @@
   $(function() {
     $("#example2").DataTable({
       "responsive": true,
-      "lengthChange": false,
+      "lengthChange": true,
       "autoWidth": true,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
   })

@@ -78,12 +78,9 @@
                 pageSize: 'LEGAL'
             }
         ],
-      "responsive": true, "lengthChange": false, "autoWidth": true,
+      "responsive": true, "lengthChange": true, "autoWidth": true,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     })
 </script>
-
-@endsection
-@section('script')
 
 @endsection
