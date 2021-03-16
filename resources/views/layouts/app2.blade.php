@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{asset('assets')}}/index3.html" class="nav-link">Logout</a>
+        <a href="{{route('logout')}}" class="nav-link">Logout</a>
       </li>
     </ul>
   </nav>
