@@ -13,16 +13,25 @@ use App\Http\Controllers\GuestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-;
 
-route::get('/try','GuestController@try');
+Route::get('/try','GuestController@try');
+Route::get('/create-account',function(){
+    $faker = Faker\Factory::create();
+        for($i=0;$i<3;$i++){
+        $data[$i] = [
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10),
+            ];
+        }
+        DB::table('users')->insert($data);
+});
 
 Route::get('/survey/guest','GuestController@guest')->name('survey');
 Route::post('/survey/store','GuestController@store')->name('survey.store');
-Route::get('/guest_master', 'GuestController@index')->name('guest_master');
+Route::get('/', 'GuestController@index')->name('guest_master');
 
 Route::get('/guest_receptionist', 'GuestController@receptionist');
 
