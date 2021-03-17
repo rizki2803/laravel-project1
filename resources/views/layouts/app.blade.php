@@ -57,7 +57,11 @@
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{asset('assets')}}/index3.html" class="nav-link">Logout</a>
+        <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
+        <form action="{{route('logout')}}" method="post">
+        @csrf
+          <span><button type="submit">logout</button></span>
+        </form>
       </li>
     </ul>
   </nav>

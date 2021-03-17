@@ -18,7 +18,7 @@
                 <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>Action</th>
                       <th>Kategori</th>
                       <th>Nama Tamu</th>
                       <th>No. Telepon</th>
@@ -34,42 +34,40 @@
                       <th>Sakit Tenggorokan</th>
                       <th>Gangguan Penciuman</th>
                       <th>Jam Keluar</th>
-                      <th>Action</th>
+
                     </tr>
                   </thead>
                   <tbody>
-                    @php
-                    $no=1;
-                    @endphp
+
                     @foreach($data as $security)
                     <tr>
-                      <td>{{$no++}}</td>
-                      <td>{{$security->gc_tipe}}</td>
-                      <td>{{$security->gm_nama}}</td>
-                      <td>{{$security->gm_tlp}}</td>
-                      <td>{{$security->gm_almt}}</td>
-                      <td>{{($security->gm_inst == "")?"Personal":$security->gm_inst}}</td>
-                      <td>{{$security->gpic_id}}</td>
-                      <td>{{$security->gm_wj}}</td>
-                      <td>{{$security->gm_tjn}}</td>
-                      <td>{{$security->gm_jd}}</td>
-                      <td>{{$security->gm_suhu}}</td>
-                      <td>{{($security->gm_srv1 == "1")?"Ya":"Tidak"}}</td>
-                      <td>{{($security->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
-                      <td>{{($security->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
-                      <td>{{($security->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
-                      <td>{{($security->gm_klr == "")?"Belum Keluar":$security->gm_klr}}</td>
-                      <td>
-                          
-                          @if ($security->gm_klr == "")
-                          <center>
-                            <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
-                              <i class="fa fa-door-open "></i>
-                            </a>
-                          </center>
-                          @endif
-                          
-                      </td>
+                        <td>
+
+                            @if ($security->gm_klr == "")
+                                <center>
+                                    <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-door-open ">Check-out</i>
+                                    </a>
+                                </center>
+                            @endif
+
+                        </td>
+                          <td>{{$security->gc_tipe}}</td>
+                          <td>{{$security->gm_nama}}</td>
+                          <td>{{$security->gm_tlp}}</td>
+                          <td>{{$security->gm_almt}}</td>
+                          <td>{{($security->gm_inst == "")?"Personal":$security->gm_inst}}</td>
+                          <td>{{$security->gpic_id}}</td>
+                          <td>{{$security->gm_wj}}</td>
+                          <td>{{$security->gm_tjn}}</td>
+                          <td>{{$security->gm_jd}}</td>
+                          <td>{{$security->gm_suhu}}</td>
+                          <td>{{($security->gm_srv1 == "1")?"Ya":"Tidak"}}</td>
+                          <td>{{($security->gm_srv2 == "1")?"Ya":"Tidak"}}</td>
+                          <td>{{($security->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
+                          <td>{{($security->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
+                          <td>{{($security->gm_klr == "")?"Belum Keluar":$security->gm_klr}}</td>
+
                     </tr>
                     @endforeach
                   </tbody>
@@ -89,6 +87,7 @@
       "lengthChange": true,
       "autoWidth": true,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
   })
 </script>
 @endsection

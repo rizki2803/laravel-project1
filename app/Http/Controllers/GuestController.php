@@ -139,7 +139,7 @@ class GuestController extends Controller
         ];
 
         \DB::table('guest_cat')->insert($store);
-        return redirect()->route('gc_get')->with(['success' => 'Update Berhasil']);
+        return redirect()->route('gc_get')->with(['success' => 'Update successfully']);
     }
 
     public function guest_cat_edit($id)
@@ -157,7 +157,7 @@ class GuestController extends Controller
         ];
 
         \DB::table('guest_cat')->where('gc_id', $id)->update($store);
-        return redirect()->route('gc_get')->with(['success' => 'Update Berhasil']);
+        return redirect()->route('gc_get')->with(['success' => 'Update successfully']);
     }
 
     public function guest_cat_del($id)
@@ -165,12 +165,16 @@ class GuestController extends Controller
 
         $a = \DB::table('guest_cat')->where('gc_id', $id)->delete();
 
-        /*return $id;
-            $del_id = GuestCategory::find($id)->delete();
-            if($del_id){}*/
+            Alert() ->warning('Warning','You wont be able to revert this!')
+                    ->showConfirmButton('Yes! Delete it', '#3085d6')
+                    ->showCancelButton('Cancel', '#aaa');
+        /*if () {
 
-            return redirect()->back();
-        }
+        }else {
+
+        }*/
+        return redirect()->back()->with('success','User deleted successfully');
+    }
 //END---------------------------CATEGORY----------------------------------------------
 
 //---------------------------RECEPTIONIST----------------------------------------------

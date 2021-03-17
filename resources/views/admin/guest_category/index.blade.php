@@ -2,6 +2,7 @@
 @section('content')
 
 </br>
+@include('sweetalert::alert')
         <!-- Main content -->
         <section class="content">
             @if ($message = Session::get('success'))
@@ -43,9 +44,9 @@
                         <a href="{{route('gc_edit',$category->gc_id)}}" class="btn btn-sm btn-warning">
                           <i class="fa fa-edit "></i>
                         </a>
-                        <a href="{{route('gc_del',$category->gc_id)}}" class="btn btn-sm btn-danger">
-                          <i class="fa fa-trash-alt "></i>
-                        </a>
+                                <a href="{{route('gc_del',$category->gc_id)}}" class="btn btn-sm btn-danger delete-confirm">
+                                  <i class="fa fa-trash-alt "></i>
+                                </a>
                     </td>
                     </tr>
                     @endforeach
@@ -62,4 +63,32 @@
         <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+//.deletebutton is the class name in button
+@foreach($gc as $category)
+<script>
+    $('.delete-confirm').on('click', function () {
+        // return confirm('Are you sure want to delete?');
+        event.preventDefault();//this will hold the url
+        swal({
+            title: "Are you sure?",
+            text: "Once clicked, this will be soft deleted!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Done! category has been soft deleted!", {
+                        icon: "success",
+                        button: false,
+                    });
+                    location.reload({{route('gc_del',$category->gc_id)}});//this will release the event
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    });
+</script>
+@endforeach
 @endsection
