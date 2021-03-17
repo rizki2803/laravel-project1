@@ -46,7 +46,7 @@
                   <td>{{$guest_master->gm_tlp}}</td>
                   <td>{{$guest_master->gm_almt}}</td>
                   <td>{{($guest_master->gm_inst == "")?"Personal":$guest_master->gm_inst}}</td>
-                  <td>{{$guest_master->gpic_id}}</td>
+                  <td>{{$guest_master->gm_pic}}</td>
                   <td>{{$guest_master->gm_wj}}</td>
                   <td>{{$guest_master->gm_tjn}}</td>
                   <td>{{$guest_master->gm_jd}}</td>

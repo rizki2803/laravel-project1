@@ -42,7 +42,7 @@ class GuestController extends Controller
             'gm_tlp' => $request->tlp,
             'gm_almt' => $request->alamat,
             'gm_inst' => $request->nama_aktif,
-            'gpic_id' => Uuid::uuid4(),
+            'gm_pic' => $request->nama_pic,
             'gm_wj' => $request->jam,
             'gm_tjn' => $request->dtltujuan,
             'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),

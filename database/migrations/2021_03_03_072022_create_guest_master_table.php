@@ -21,7 +21,9 @@ class CreateGuestMasterTable extends Migration
             $table->string('gm_tlp')->nullable();
             $table->string('gm_almt')->nullable();
             $table->string('gm_inst')->nullable();
-            $table->uuid('gpic_id');            
+            $table->string('gm_pic')->nullable();
+            $table->string('pic_email')->nullable();
+            $table->string('pic_tlp')->nullable();
             $table->time('gm_wj')->nullable();
             $table->string('gm_tjn')->nullable();
             $table->datetime('gm_jd')->nullable();

@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="form-group">
                       <label>Tujuan :</label><br>
                       <label>Nama PIC</label>
-                      <input name="namapic" type="text" class="form-control" placeholder="Enter ...">
+                      <input name="nama_pic" type="text" class="form-control" placeholder="Enter ...">
                     </div>
                     <div class="form-group">
                       <!-- /.input group -->

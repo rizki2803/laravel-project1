@@ -45,7 +45,7 @@
                   <td>{{$receptionist->gm_tlp}}</td>
                   <td>{{$receptionist->gm_almt}}</td>
                   <td>{{($receptionist->gm_inst == "")?"Personal":$receptionist->gm_inst}}</td>
-                  <td>{{$receptionist->gpic_id}}</td>
+                  <td>{{$receptionist->gm_pic}}</td>
                   <td>{{$receptionist->gm_wj}}</td>
                   <td>{{$receptionist->gm_tjn}}</td>
                   <td>{{$receptionist->gm_jd}}</td>
@@ -71,7 +71,7 @@
   $(function () {
     $("#example2").DataTable
     ({buttons: [
-      "excel", 
+      "excel",
             {
                 extend: 'pdfHtml5',
                 orientation: 'landscape',
