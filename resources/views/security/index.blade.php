@@ -46,7 +46,7 @@
                             @if ($security->gm_klr == "")
                                 <center>
                                     <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-door-open ">Check-out</i>
+                                        <i class="fa fa-door-open "> Check-out</i>
                                     </a>
                                 </center>
                             @endif
@@ -86,6 +86,7 @@
       "responsive": true,
       "lengthChange": true,
       "autoWidth": true,
+      "pageLength": 100
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
   })

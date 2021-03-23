@@ -52,6 +52,7 @@ Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name
 Route::get('/contact', [GuestController::class, 'createForm']);
 
 Route::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

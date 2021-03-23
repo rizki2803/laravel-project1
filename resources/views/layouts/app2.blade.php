@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="shortcut icon" href="{{asset('img')}}/HariffLogo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PT. Hariff DTE</title>
-  
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -68,3 +68,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer text-sm">
         <strong>Copyright &copy; 2021 <a href="https://hariff.co.id/">PT. Hariff DTE</a>.</strong> All rights reserved.
     </footer>
+</div>
