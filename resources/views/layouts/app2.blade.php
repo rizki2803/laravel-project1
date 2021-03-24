@@ -57,9 +57,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </a>
     </div>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('logout')}}" class="nav-link">Logout</a>
-      </li>
+        <li class="nav-item d-none d-sm-inline-block">
+        <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <span><button type="submit" class="btn-default btn-sm">Logout</button></span>
+            </form>
+        </li>
     </ul>
   </nav>
     <div class="content-wrapper body">

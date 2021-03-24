@@ -145,9 +145,11 @@ class GuestController extends Controller
 
     public function guest_cat_crt(Request $request)
         {
+            $gc_tipe_conv = strtoupper($request->gc_tipe);
+
             $store = [
                 'gc_id' => Uuid::uuid4(),
-                'gc_tipe' => $request->gc_tipe,
+                'gc_tipe' => $gc_tipe_conv,
             ];
 
             \DB::table('guest_cat')->insert($store);
@@ -163,9 +165,11 @@ class GuestController extends Controller
 
     public function guest_cat_upt(Request $request, $id)
         {
+            $gc_tipe_conv = strtoupper($request->gc_tipe);
+
             $store = [
                 //'id' => Uuid::uuid4(),
-                'gc_tipe' => $request->gc_tipe
+                'gc_tipe' => $gc_tipe_conv
             ];
 
             \DB::table('guest_cat')->where('gc_id', $id)->update($store);
@@ -175,17 +179,9 @@ class GuestController extends Controller
     public function guest_cat_del($id)
         {
 
-            $a = \DB::table('guest_cat')->where('gc_id', $id)->delete();
+            \DB::table('guest_cat')->where('gc_id', $id)->delete();
 
-                Alert() ->warning('Warning','You wont be able to revert this!')
-                        ->showConfirmButton('Yes! Delete it', '#3085d6')
-                        ->showCancelButton('Cancel', '#aaa');
-            /*if () {
-
-            }else {
-
-            }*/
-            return redirect()->back()->with('success','User deleted successfully');
+            return redirect()->back()->with('warning','User deleted successfully, Can not be returned!');
         }
 //END---------------------------CATEGORY----------------------------------------------
 
