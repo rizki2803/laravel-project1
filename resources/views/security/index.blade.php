@@ -45,7 +45,7 @@
 
                             @if ($security->gm_klr == "")
                                 <center>
-                                    <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-danger">
+                                    <a href="{{route('login', $security->gm_id)}}" class="btn btn-sm btn-danger">
                                         <i class="fa fa-door-open ">Check-out</i>
                                     </a>
                                 </center>

@@ -145,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             YA
                           </label>
                         </div>
-                        <div class="icheck-danger d-inline ">
+                        <div class="icheck-danger d-inline col-6">
                           <input type="radio" name="r1" value="tidak" id="radioDanger2">
                           <label for="radioDanger2">
                             Tidak

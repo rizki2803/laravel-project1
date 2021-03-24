@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="shortcut icon" href="{{asset('img')}}/HariffLogo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PT. Hariff DTE</title>
-  
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -56,11 +56,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>
     </div>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('logout')}}" class="nav-link">Logout</a>
-      </li>
-    </ul>
+      <ul class="navbar-nav ml-auto">
+          <!-- Messages Dropdown Menu -->
+          <li class="nav-item d-none d-sm-inline-block">
+          <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
+              <form action="{{route('logout')}}" method="post">
+                  @csrf
+                  <span><button type="submit">logout</button></span>
+              </form>
+          </li>
+      </ul>
   </nav>
     <div class="content-wrapper body">
      @yield('content')

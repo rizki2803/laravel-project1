@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,7 @@ use App\Http\Controllers\GuestController;
 
 Route::get('/try','GuestController@try');
 Route::get('/create-account',function(){
-    $faker = Faker\Factory::create();
+    $faker = Faker\Factory::create() ;
         for($i=0;$i<3;$i++){
         $data[$i] = [
                 'name' => $faker->name,
@@ -29,16 +31,19 @@ Route::get('/create-account',function(){
         DB::table('users')->insert($data);
 });
 
+
+
+
 Route::get('/survey/guest','GuestController@guest')->name('survey');
 Route::post('/survey/store','GuestController@store')->name('survey.store');
 Route::get('/', 'GuestController@index')->name('guest_master');
 
-Route::get('/guest_receptionist', 'GuestController@receptionist');
+Route::get('/guest_receptionist', 'GuestController@receptionist')->name('guest_receptionist')->middleware('receptionist');
 
-Route::get('/guest_security', 'GuestController@security');
+Route::get('/guest_security', 'GuestController@security')->name('guest_security')->middleware('security');
 Route::get('/guest_security/upt/{gm_id}', 'GuestController@security_upt')->name('scrt_upt');
 
-Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get');
+Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('admin');
 
 Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
 Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
@@ -53,7 +58,6 @@ Route::get('/contact', [GuestController::class, 'createForm']);
 
 Route::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home   ', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
