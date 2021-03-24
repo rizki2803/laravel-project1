@@ -60,7 +60,7 @@
         <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
         <form action="{{route('logout')}}" method="post">
         @csrf
-          <span><button type="submit">logout</button></span>
+          <span><button type="submit" class="btn-default btn-sm">Logout</button></span>
         </form>
       </li>
     </ul>

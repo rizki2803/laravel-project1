@@ -12,6 +12,15 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+              <tr>
+                  <td>Minimum date:</td>
+                  <td><input type="text" id="min" name="min"></td>
+              </tr>
+              <tr>
+                  <td>&ensp;Maximum date:</td>
+                  <td><input type="text" id="max" name="max"></td>
+              <br></br>
+              </tr>
             <table id="example2" class="table table-bordered table-striped table-responsive text-nowrap">
               <thead>
                 <tr>
@@ -78,7 +87,7 @@
                 pageSize: 'LEGAL'
             }
         ],
-      "responsive": true, "lengthChange": true, "autoWidth": true,
+      "responsive": true, "lengthChange": true, "autoWidth": true, "pageLength": 100
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     })
 </script>

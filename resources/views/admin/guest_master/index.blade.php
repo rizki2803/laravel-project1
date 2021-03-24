@@ -77,6 +77,7 @@
         "responsive": true,
         "lengthChange": true,
         "autoWidth": true,
+        "pageLength": 100,
     }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
   })
 </script>

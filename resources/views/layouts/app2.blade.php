@@ -56,16 +56,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>
     </div>
-      <ul class="navbar-nav ml-auto">
-          <!-- Messages Dropdown Menu -->
-          <li class="nav-item d-none d-sm-inline-block">
-          <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
-              <form action="{{route('logout')}}" method="post">
-                  @csrf
-                  <span><button type="submit">logout</button></span>
-              </form>
-          </li>
-      </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-none d-sm-inline-block">
+        <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <span><button type="submit" class="btn-default btn-sm">Logout</button></span>
+            </form>
+        </li>
+    </ul>
   </nav>
     <div class="content-wrapper body">
      @yield('content')
@@ -73,3 +72,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer text-sm">
         <strong>Copyright &copy; 2021 <a href="https://hariff.co.id/">PT. Hariff DTE</a>.</strong> All rights reserved.
     </footer>
+</div>
