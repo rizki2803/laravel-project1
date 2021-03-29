@@ -118,11 +118,20 @@ class GuestController extends Controller
 
 
 //---------------------------ADMIN GUEST MASTER----------------------------------------------
-    public function guest_master()
+    public function guest_master(Request $request)
         {
-            $data = Guest::select('*')
-            ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
-            ->get();
+            if(($request->has('min')) && ($request->has('max'))) {
+                $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                    ->wherebetween('gm_jd',[$request->min.' 00:00:00', $request->max.' 23:59:59'])
+                    ->get();
+                //dd($request->min, $request->max);
+            }
+            else {
+                $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                    ->get();
+            }
             return view('admin.guest_master.index', [
                 'data'=>$data
             ]);
@@ -186,21 +195,32 @@ class GuestController extends Controller
 //END---------------------------CATEGORY----------------------------------------------
 
 //---------------------------RECEPTIONIST----------------------------------------------
-    public function receptionist()
+    public function receptionist(Request $request)
         {
-            /*$data ['data'] = \DB::table('guest_master')
-            ->leftjoin('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
-            ->get();
-            dd($data['data']);
-            */
-            $data = Guest::select('*')
+            /*$data = Guest::select('*')
+                ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                ->get();*/
+
+            if(($request->has('min')) && ($request->has('max'))) {
+                $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                    ->wherebetween('gm_jd',[$request->min.' 00:00:00', $request->max.' 23:59:59'])
+                    ->get();
+                //dd($request->min, $request->max);
+            }
+            else {
+                //dd($request->date_filter);
+                $data = Guest::select('*')
                     ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
                     ->get();
-                    //dd($data2);
+            }
             return view('receptionist.index',[
                 'data'=>$data
             ]);
+
         }
+
+
 
 //END---------------------------RECEPTIONIST----------------------------------------------
 

@@ -19,16 +19,11 @@
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
-  <!-- Sweet Alert -->
-  <link href="{{ asset('/dist/css/sweetalert.css') }}" rel="stylesheet">
-  <!-- Sweet Alert -->
-  <script src="{{ asset('/dist/js/sweetalert.min.js') }}"></script>
   <!-- jQuery -->
   <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
   <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/jszip/jszip.min.js"></script>
@@ -56,7 +51,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-sm-inline-block">
         <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
         <form action="{{route('logout')}}" method="post">
         @csrf
