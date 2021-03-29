@@ -23,7 +23,7 @@
                 <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Category</h3>
-                    <a href="{{route('gc_store')}}" class="float-sm-right btn btn-xs btn-primary">
+                    <a href="{{route('gc_store')}}" class="float-right btn btn-xs btn-primary">
                           <i class="fa fa-plus"></i>
                     </a>
                     </div>

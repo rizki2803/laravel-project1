@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                       <!-- radio -->
                       <div class="col-sm-12">
-                          <table class="table table-bordered table-striped>
+                          <table class="table table-bordered table-striped">
                             <tr><td colspan="3"><label>Kondisi Tubuh :</label></td></tr>
                             <tr>
                                 <td><label>Apakah anda sedang sakit?</label></td>

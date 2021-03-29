@@ -27,20 +27,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- jQuery -->
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.css">
+    <!-- jQuery -->
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
   <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('assets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="{{asset('assets')}}/plugins/jszip/jszip.min.js"></script>
 <script src="{{asset('assets')}}/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="{{asset('assets')}}/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- AdminLTE App -->
 <script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
 </head>
@@ -50,14 +52,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-    <div class="container">
+    <div class="container col-sm-11">
       <a href="https://hariff.co.id/" class="navbar-brand">
         <img src="{{asset('img')}}/HariffLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PT. Hariff DTE</span>
       </a>
-    </div>
+
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item d-none d-sm-inline-block">
+        <li class="nav-item d-sm-inline-block">
         <!-- <a href="{{route('logout')}}" class="nav-link">Logout</a> -->
             <form action="{{route('logout')}}" method="post">
                 @csrf
@@ -65,6 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </form>
         </li>
     </ul>
+    </div>
   </nav>
     <div class="content-wrapper body">
      @yield('content')
