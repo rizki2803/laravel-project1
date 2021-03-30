@@ -34,9 +34,9 @@ Route::get('/create-account',function(){
 });
 Route::middleware([\App\Http\Middleware\isAdmin::class])->group(function () {
 
-    Route::get('/isAdmin', 'LoginController@index')->name('isAdmin')->middleware('isAdmin');
-    Route::get('/isSecurity', 'Logincontroller@index')->name('isSecurity')->middleware('isSecurity');
-    Route::get('/receptionist', 'LoginController@index')->name('receptionist')->middleware('receptionist');
+    Route::get('/isAdmin', 'loginController@index')->name('isAdmin')->middleware('isAdmin');
+    Route::get('/isSecurity', 'logincontroller@index')->name('isSecurity')->middleware('isSecurity');
+    Route::get('/receptionist', 'loginController@index')->name('receptionist')->middleware('receptionist');
     Route::get('logout', ' App\Http\Controllers\Auth\LoginController@logout');
     Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
     Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
