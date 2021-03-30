@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7724257-2b6b-4094-bf01-414db2ba744b" name="Default Changelist" comment="push konflik">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="f3210b89-dd09-4209-8103-69ebb6a4c6cf" name="Default Changelist" comment="update login" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +23,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/GuestController.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -186,7 +181,7 @@
       <workItem from="1617005214617" duration="7194000" />
       <workItem from="1617066242051" duration="1551000" />
       <workItem from="1617068550185" duration="1062000" />
-      <workItem from="1617071236939" duration="17728000" />
+      <workItem from="1617071236939" duration="20256000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/master'">
       <created>1617010003669</created>
@@ -195,14 +190,42 @@
       <option name="project" value="LOCAL" />
       <updated>1617010003669</updated>
     </task>
-    <task id="LOCAL-00002" summary="push konflik">
-      <created>1617095556001</created>
+    <task id="LOCAL-00002" summary="update login">
+      <created>1617093669093</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1617095556001</updated>
+      <updated>1617093669093</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update login">
+      <created>1617093715306</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1617093715306</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update login">
+      <created>1617094828481</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1617094828481</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update login">
+      <created>1617095258810</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1617095258810</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update login">
+      <created>1617095705042</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1617095705042</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,7 +328,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
-    <MESSAGE value="push konflik" />
-    <option name="LAST_COMMIT_MESSAGE" value="push konflik" />
+    <MESSAGE value="update login" />
+    <option name="LAST_COMMIT_MESSAGE" value="update login" />
   </component>
 </project>
