@@ -84,9 +84,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                             <input type="password" name="password" class="form-control" placeholder="password">
                                         </div>
-                                       
+
                                         <div class="form-group mb-0">
-                                             
+
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -100,22 +100,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     </div>
                 </div>
+            </section>
         </div>
 
-    </div>
-    </div>
-    </section>
-    <!-- Main Footer -->
 
-    </div>
-    <!-- ./wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block text-sm">
-        </div>
-        <strong>Copyright © 2021 <a href="https://hariff.co.id/">PT.Hariff DTE</a>.</strong> All rights reserved.
-    </footer>
-    </div>
 
+        <footer class="main-footer">
+            <div class="d-sm-block text-sm">
+                <strong>Copyright © 2021 <a href="https://hariff.co.id/">PT.Hariff DTE</a>.</strong> All rights reserved.
+            </div>
+        </footer>
+    </div>
+</body>
 </html>
 
 <!-- REQUIRED SCRIPTS -->
