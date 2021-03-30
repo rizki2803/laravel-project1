@@ -84,9 +84,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                             <input type="password" class="form-control" placeholder="password">
                                         </div>
-                                       
+
                                         <div class="form-group mb-0">
-                                             
+
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
