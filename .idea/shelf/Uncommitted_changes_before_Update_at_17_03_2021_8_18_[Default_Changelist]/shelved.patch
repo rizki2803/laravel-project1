@@ -1,0 +1,181 @@
+Index: app/Http/Controllers/GuestController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Controllers;\r\n\r\nuse Illuminate\\Http\\Request;\r\nuse App\\Models\\GuestCategory;\r\nuse App\\Models\\Guest;\r\nuse DataTables;\r\nuse Ramsey\\Uuid\\Uuid;\r\nuse RealRashid\\SweetAlert\\Facades\\Alert;\r\nuse Carbon\\Carbon;\r\nuse Illuminate\\Support\\Facades\\DB;\r\n\r\n\r\nclass GuestController extends Controller\r\n{\r\n    //\r\n    public function index()\r\n    {\r\n        $data['gc'] = \\DB::table('guest_cat')->pluck('gc_tipe', 'gc_tipe');\r\n\r\n        return view('guest.guest', $data);\r\n        /*  $data = Guest::get();\r\n          return view('guest.index',[\r\n              'data'=>$data\r\n          ]);\r\n          */\r\n    }\r\n    public function guest(Request $request)\r\n    {\r\n        return view('guest.survey');\r\n    }\r\n    public function store(Request $request)\r\n    {\r\n        // dd($request->all());\r\n        $gc = DB::table('guest_cat')->where('gc_tipe', $request->guestcategory)->first();\r\n\r\n        $store = [\r\n            'gm_id' => Uuid::uuid4(),\r\n            'gc_id' => $gc->gc_id,\r\n            'gm_nama' => $request->nama,\r\n            'gm_tlp' => $request->tlp,\r\n            'gm_almt' => $request->alamat,\r\n            'gm_inst' => $request->nama_aktif,\r\n            'gpic_id' => Uuid::uuid4(),\r\n            'gm_wj' => $request->jam,\r\n            'gm_tjn' => $request->dtltujuan,\r\n            'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),\r\n            'gm_suhu' => $request->suhu,\r\n            'gm_srv1' => ($request->r1 == \"Ya\") ? 1 : 0,\r\n            'gm_srv2' => ($request->r2 == \"Ya\") ? 1 : 0,\r\n            'gm_srv3' => ($request->r3 == \"Ya\") ? 1 : 0,\r\n            'gm_srv4' => ($request->r4 == \"Ya\") ? 1 : 0\r\n        ];\r\n\r\n\r\n        // dd($store);\r\n         \\DB::table('guest_master')->insert($store);\r\n        if ($store) {\r\n            Alert::success('Success Title', 'Data berhasil diisi');\r\n        } else {\r\n            Alert::error('Error Title', 'Data yang diisi mungkin belum sesuai atau ada yang masih kosong!');\r\n        }\r\n\r\n        return back();\r\n\r\n        // return redirect()->back();\r\n        /* $validator = $this->validate($request, [\r\n            'gm_nama' => 'required|min:3',\r\n            'gm_tlp'  =>'required|min:3'\r\n          \r\n         ]);\r\n         dd($validator);\r\n        if ($this->fails()) {\r\n\r\n            return back()->with('toast_error', $this->messages()->all()[0])->withInput();\r\n        }\r\n        $task = Guest::create($request->all());\r\n        return redirect()->back()-> with('toast_success', 'Task Created Successfully!');*/\r\n    }\r\n    /* $store =[\r\n        'id'=>Uuid::uuid4(),\r\n        'gc_id'=>$request->gc,\r\n        'gm_nama'=>'nama tamu',\r\n        'gm_tlp'=>'123123',\r\n        'gm_almt'=>'alamat',\r\n        'gm_inst'=>'instansi',\r\n        'gpic_id'=>Uuid::uuid4(),            \r\n        'gm_wj'=>Carbon::now(),\r\n        'gm_tjn'=>'tujuan',\r\n        'gm_jd'=>Carbon::now(),\r\n        'gm_suhu'=>'35.5',\r\n        'gm_srv1'=>''\r\n        $table->boolean('gm_srv1')\r\n        $table->boolean('gm_srv2')\r\n        $table->boolean('gm_srv3')\r\n        $table->boolean('gm_srv4')\r\n      ];\r\n\r\n      Alert::question('Data yang diisi sudah selesai?');\r\n        return back();*/\r\n\r\n\r\n    // return $request;\r\n    // return view ('guest.survey');\r\n\r\n\r\n//---------------------------ADMIN GUEST MASTER----------------------------------------------\r\n    public function guest_master()\r\n    {\r\n        $data = Guest::select('*')\r\n        ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')\r\n        ->get();\r\n        return view('admin.guest_master.index', [\r\n            'data'=>$data\r\n        ]);\r\n    }\r\n//END---------------------------ADMIN GUEST MASTER----------------------------------------------\r\n\r\n//---------------------------CATEGORY----------------------------------------------    \r\n    public function guest_cat()\r\n    {\r\n        $data['gc'] = \\DB::table('guest_cat')->get();\r\n        //$data ['gm'] = \\DB::table('guest_master')->select('gm_nama')->first();\r\n        //$data ['gc'] = GuestCategory::all();\r\n        return view('admin.guest_category.index', $data);\r\n    }\r\n\r\n    public function guest_cat_form()\r\n    {\r\n\r\n        return view('admin.guest_category.form');\r\n    }\r\n\r\n    public function guest_cat_crt(Request $request)\r\n    {\r\n        $store = [\r\n            'gc_id' => Uuid::uuid4(),\r\n            'gc_tipe' => $request->gc_tipe,\r\n        ];\r\n\r\n        \\DB::table('guest_cat')->insert($store);\r\n        return view('admin.guest_category.success');\r\n    }\r\n\r\n    public function guest_cat_edit($id)\r\n    {\r\n        $tipe ['gc'] = \\DB::table('guest_cat')->where('gc_id', $id)->first();\r\n\r\n        return view('admin.guest_category.edit', $tipe);\r\n    }\r\n\r\n    public function guest_cat_upt(Request $request, $id)\r\n    {\r\n        $store = [\r\n            //'id' => Uuid::uuid4(),\r\n            'gc_tipe' => $request->gc_tipe\r\n        ];\r\n\r\n        \\DB::table('guest_cat')->where('gc_id', $id)->update($store);\r\n        return view('admin.guest_category.success');\r\n    }\r\n\r\n    public function guest_cat_del($id)\r\n    {\r\n\r\n        $a = \\DB::table('guest_cat')->where('gc_id', $id)->delete();\r\n\r\n        /*return $id;\r\n            $del_id = GuestCategory::find($id)->delete();\r\n            if($del_id){}*/\r\n                \r\n            return redirect()->back();   \r\n        }\r\n//END---------------------------CATEGORY----------------------------------------------\r\n\r\n//---------------------------RECEPTIONIST----------------------------------------------\r\n        public function receptionist()\r\n        {\r\n            /*$data ['data'] = \\DB::table('guest_master')\r\n            ->leftjoin('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')\r\n            ->get();\r\n            dd($data['data']);\r\n            */\r\n            $data = Guest::select('*')\r\n                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')\r\n                    ->get();\r\n                    //dd($data2);\r\n            return view('receptionist.index',[\r\n                'data'=>$data\r\n            ]);\r\n        }\r\n//END---------------------------RECEPTIONIST----------------------------------------------\r\n       \r\n//---------------------------SECURITY----------------------------------------------\r\n    public function security()\r\n    {\r\n        \r\n            /*\r\n            $data = Guest::select('*')\r\n            ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')\r\n            ->get();\r\n            return view('security.index',[\r\n                'data'=>$data\r\n            ]);\r\n            */\r\n\r\n                $data ['data'] = \\DB::table('guest_master')\r\n                                ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')\r\n                                //->select('guest_master.id' ,'guest_cat.gc_tipe','guest_mstr.gm_nama')\r\n                                ->get();\r\n                return view ('security.index', $data);\r\n\r\n        }\r\n\r\n        public function security_upt($id)\r\n        {\r\n            \r\n            $store = [\r\n                'gm_klr' => Carbon::now()->setTimezone('asia/jakarta')\r\n            ];\r\n    \r\n            \\DB::table('guest_master')->where('gm_id', $id)->update($store);                \r\n            return redirect()->back();   \r\n        }\r\n//END---------------------------SECURITY----------------------------------------------\r\n\r\n    public function try()\r\n    {\r\n        \r\n        $a = \\DB::table('guest_master')\r\n                ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')\r\n                ->get();\r\n\r\n            echo $a;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Http/Controllers/GuestController.php b/app/Http/Controllers/GuestController.php
+--- a/app/Http/Controllers/GuestController.php	
++++ b/app/Http/Controllers/GuestController.php	
+@@ -6,10 +6,12 @@
+ use App\Models\GuestCategory;
+ use App\Models\Guest;
+ use DataTables;
++use Monolog\Handler\IFTTTHandler;
+ use Ramsey\Uuid\Uuid;
+ use RealRashid\SweetAlert\Facades\Alert;
+ use Carbon\Carbon;
+ use Illuminate\Support\Facades\DB;
++use function PHPUnit\Framework\lessThanOrEqual;
+ 
+ 
+ class GuestController extends Controller
+@@ -55,20 +57,58 @@
+ 
+ 
+         // dd($store);
+-         \DB::table('guest_master')->insert($store);
+-        if ($store) {
+-            Alert::success('Success Title', 'Data berhasil diisi');
+-        } else {
++
++//        $gm_tlp = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
++        $a = $request->tlp;
++        if (strpos($a, 'a') !== false ||
++            strpos($a, 'b') !== false ||
++            strpos($a, 'c') !== false ||
++            strpos($a, 'd') !== false ||
++            strpos($a, 'e') !== false ||
++            strpos($a, 'f') !== false ||
++            strpos($a, 'g') !== false ||
++            strpos($a, 'h') !== false ||
++            strpos($a, 'i') !== false ||
++            strpos($a, 'j') !== false ||
++            strpos($a, 'k') !== false ||
++            strpos($a, 'l') !== false ||
++            strpos($a, 'm') !== false ||
++            strpos($a, 'n') !== false ||
++            strpos($a, 'o') !== false ||
++            strpos($a, 'p') !== false ||
++            strpos($a, 'q') !== false ||
++            strpos($a, 'r') !== false ||
++            strpos($a, 's') !== false ||
++            strpos($a, 't') !== false ||
++            strpos($a, 'u') !== false ||
++            strpos($a, 'v') !== false ||
++            strpos($a, 'w') !== false ||
++            strpos($a, 'x') !== false ||
++            strpos($a, 'y') !== false ||
++            strpos($a, 'z') !== false){
++
++            \DB::table('guest_master')->insert($store);
+             Alert::error('Error Title', 'Data yang diisi mungkin belum sesuai atau ada yang masih kosong!');
++
++
++            return redirect('/');
+         }
++//      if (in_array($request->tlp, $gm_tlp))
+ 
+-        return back();
++    else {
++//        dd('strpos');
++        Alert::success('Success Title', 'Data berhasil diisi')->showConfirmButton('Confirm', '#3085d6');
++            return redirect('/');
++        }
++
++    }
++//        return back();
+ 
+         // return redirect()->back();
+         /* $validator = $this->validate($request, [
+             'gm_nama' => 'required|min:3',
+             'gm_tlp'  =>'required|min:3'
+-          
++
+          ]);
+          dd($validator);
+         if ($this->fails()) {
+@@ -77,7 +117,7 @@
+         }
+         $task = Guest::create($request->all());
+         return redirect()->back()-> with('toast_success', 'Task Created Successfully!');*/
+-    }
++
+     /* $store =[
+         'id'=>Uuid::uuid4(),
+         'gc_id'=>$request->gc,
+@@ -85,7 +125,7 @@
+         'gm_tlp'=>'123123',
+         'gm_almt'=>'alamat',
+         'gm_inst'=>'instansi',
+-        'gpic_id'=>Uuid::uuid4(),            
++        'gpic_id'=>Uuid::uuid4(),
+         'gm_wj'=>Carbon::now(),
+         'gm_tjn'=>'tujuan',
+         'gm_jd'=>Carbon::now(),
+@@ -117,7 +157,7 @@
+     }
+ //END---------------------------ADMIN GUEST MASTER----------------------------------------------
+ 
+-//---------------------------CATEGORY----------------------------------------------    
++//---------------------------CATEGORY----------------------------------------------
+     public function guest_cat()
+     {
+         $data['gc'] = \DB::table('guest_cat')->get();
+@@ -169,8 +209,8 @@
+         /*return $id;
+             $del_id = GuestCategory::find($id)->delete();
+             if($del_id){}*/
+-                
+-            return redirect()->back();   
++
++            return redirect()->back();
+         }
+ //END---------------------------CATEGORY----------------------------------------------
+ 
+@@ -191,11 +231,11 @@
+             ]);
+         }
+ //END---------------------------RECEPTIONIST----------------------------------------------
+-       
++
+ //---------------------------SECURITY----------------------------------------------
+     public function security()
+     {
+-        
++
+             /*
+             $data = Guest::select('*')
+             ->join('guest_cat', 'guest_cat.id','=', 'guest_master.gc_id')
+@@ -215,19 +255,19 @@
+ 
+         public function security_upt($id)
+         {
+-            
++
+             $store = [
+                 'gm_klr' => Carbon::now()->setTimezone('asia/jakarta')
+             ];
+-    
+-            \DB::table('guest_master')->where('gm_id', $id)->update($store);                
+-            return redirect()->back();   
++
++            \DB::table('guest_master')->where('gm_id', $id)->update($store);
++            return redirect()->back();
+         }
+ //END---------------------------SECURITY----------------------------------------------
+ 
+     public function try()
+     {
+-        
++
+         $a = \DB::table('guest_master')
+                 ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')
+                 ->get();
+Index: config/sweetalert.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nreturn [\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | CDN LINK\r\n    |--------------------------------------------------------------------------\r\n    | By default SweetAlert2 use its local sweetalert.all.js\r\n    | file.\r\n    | However, you can use its cdn if you want.\r\n    |\r\n    */\r\n\r\n    'cdn' => env('SWEET_ALERT_CDN'),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Always load the sweetalert.all.js\r\n    |--------------------------------------------------------------------------\r\n    | There might be situations where you will always want the sweet alert\r\n    | js package to be there for you. (for eg. you might use it heavily to\r\n    | show notifications or you might want to use the native js) then this\r\n    | might be handy.\r\n    |\r\n    */\r\n\r\n    'alwaysLoadJS' => env('SWEET_ALERT_ALWAYS_LOAD_JS', false),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Never load the sweetalert.all.js\r\n    |--------------------------------------------------------------------------\r\n    | If you want to handle the sweet alert js package by yourself\r\n    | (for eg. you might want to use laravel mix) then this can be\r\n    | handy.\r\n    | If you set always load js to true & never load js to false,\r\n    | it's going to prioritize the never load js.\r\n    |\r\n    | alwaysLoadJs = true  & neverLoadJs = true  => js will not be loaded\r\n    | alwaysLoadJs = true  & neverLoadJs = false => js will be loaded\r\n    | alwaysLoadJs = false & neverLoadJs = false => js will be loaded when\r\n    | you set alert/toast by using the facade/helper functions.\r\n    */\r\n\r\n    'neverLoadJS' => env('SWEET_ALERT_NEVER_LOAD_JS', false),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | AutoClose Timer\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | This is for the all Modal windows.\r\n    | For specific modal just use the autoClose() helper method.\r\n    |\r\n    */\r\n\r\n    'timer' => env('SWEET_ALERT_TIMER', 5000),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Width\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Modal window width, including paddings (box-sizing: border-box).\r\n    | Can be in px or %.\r\n    | The default width is 32rem.\r\n    | This is for the all Modal windows.\r\n    | for particular modal just use the width() helper method.\r\n    */\r\n\r\n    'width' => env('SWEET_ALERT_WIDTH', '32rem'),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Height Auto\r\n    |--------------------------------------------------------------------------\r\n    | By default, SweetAlert2 sets html's and body's CSS height to auto !important.\r\n    | If this behavior isn't compatible with your project's layout,\r\n    | set heightAuto to false.\r\n    |\r\n    */\r\n\r\n    'height_auto' => env('SWEET_ALERT_HEIGHT_AUTO', true),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Padding\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Modal window padding.\r\n    | Can be in px or %.\r\n    | The default padding is 1.25rem.\r\n    | This is for the all Modal windows.\r\n    | for particular modal just use the padding() helper method.\r\n    */\r\n\r\n    'padding' => env('SWEET_ALERT_PADDING', '1.25rem'),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Animation\r\n    |--------------------------------------------------------------------------\r\n    | Custom animation with [Animate.css](https://daneden.github.io/animate.css/)\r\n    | If set to false, modal CSS animation will be use default ones.\r\n    | For specific modal just use the animation() helper method.\r\n    |\r\n    */\r\n\r\n    'animation' => [\r\n        'enable' => env('SWEET_ALERT_ANIMATION_ENABLE', false),\r\n    ],\r\n\r\n    'animatecss' => env('SWEET_ALERT_ANIMATECSS', 'https://cdn.jsdelivr.net/npm/animate.css'),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | ShowConfirmButton\r\n    |--------------------------------------------------------------------------\r\n    | If set to false, a \"Confirm\"-button will not be shown.\r\n    | It can be useful when you're using custom HTML description.\r\n    | This is for the all Modal windows.\r\n    | For specific modal just use the showConfirmButton() helper method.\r\n    |\r\n    */\r\n\r\n    'show_confirm_button' => env('SWEET_ALERT_CONFIRM_BUTTON', true),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | ShowCloseButton\r\n    |--------------------------------------------------------------------------\r\n    | If set to true, a \"Close\"-button will be shown,\r\n    | which the user can click on to dismiss the modal.\r\n    | This is for the all Modal windows.\r\n    | For specific modal just use the showCloseButton() helper method.\r\n    |\r\n    */\r\n\r\n    'show_close_button' => env('SWEET_ALERT_CLOSE_BUTTON', false),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Toast position\r\n    |--------------------------------------------------------------------------\r\n    | Modal window or toast position, can be 'top',\r\n    | 'top-start', 'top-end', 'center', 'center-start',\r\n    | 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.\r\n    | For specific modal just use the position() helper method.\r\n    |\r\n    */\r\n\r\n    'toast_position' => env('SWEET_ALERT_TOAST_POSITION', 'top-end'),\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Middleware\r\n    |--------------------------------------------------------------------------\r\n    | Modal window or toast, config for the Middleware\r\n    |\r\n    */\r\n\r\n    'middleware' => [\r\n\r\n        'autoClose' => env('SWEET_ALERT_MIDDLEWARE_AUTO_CLOSE', false),\r\n\r\n        'toast_position' => env('SWEET_ALERT_MIDDLEWARE_TOAST_POSITION', 'top-end'),\r\n\r\n        'toast_close_button' => env('SWEET_ALERT_MIDDLEWARE_TOAST_CLOSE_BUTTON', true),\r\n\r\n        'timer' => env('SWEET_ALERT_MIDDLEWARE_ALERT_CLOSE_TIME', 6000),\r\n\r\n        'auto_display_error_messages' => env('SWEET_ALERT_AUTO_DISPLAY_ERROR_MESSAGES', false),\r\n    ],\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Custom Class\r\n    |--------------------------------------------------------------------------\r\n    | A custom CSS class for the modal:\r\n    |\r\n    */\r\n\r\n    'customClass' => [\r\n\r\n        'container' => env('SWEET_ALERT_CONTAINER_CLASS'),\r\n        'popup' => env('SWEET_ALERT_POPUP_CLASS'),\r\n        'header' => env('SWEET_ALERT_HEADER_CLASS'),\r\n        'title' => env('SWEET_ALERT_TITLE_CLASS'),\r\n        'closeButton' => env('SWEET_ALERT_CLOSE_BUTTON_CLASS'),\r\n        'icon' => env('SWEET_ALERT_ICON_CLASS'),\r\n        'image' => env('SWEET_ALERT_IMAGE_CLASS'),\r\n        'content' => env('SWEET_ALERT_CONTENT_CLASS'),\r\n        'input' => env('SWEET_ALERT_INPUT_CLASS'),\r\n        'actions' => env('SWEET_ALERT_ACTIONS_CLASS'),\r\n        'confirmButton' => env('SWEET_ALERT_CONFIRM_BUTTON_CLASS'),\r\n        'cancelButton' => env('SWEET_ALERT_CANCEL_BUTTON_CLASS'),\r\n        'footer' => env('SWEET_ALERT_FOOTER_CLASS'),\r\n    ],\r\n\r\n];\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/sweetalert.php b/config/sweetalert.php
+--- a/config/sweetalert.php	
++++ b/config/sweetalert.php	
+@@ -1,4 +1,4 @@
+-<?php
++    <?php
+ 
+ return [
+ 

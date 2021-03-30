@@ -1,0 +1,420 @@
+Index: app/Http/Kernel.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http;\r\n\r\nuse Illuminate\\Foundation\\Http\\Kernel as HttpKernel;\r\n\r\nclass Kernel extends HttpKernel\r\n{\r\n    /**\r\n     * The application's global HTTP middleware stack.\r\n     *\r\n     * These middleware are run during every request to your application.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $middleware = [\r\n        // \\App\\Http\\Middleware\\TrustHosts::class,\r\n        \r\n      \r\n        \\App\\Http\\Middleware\\TrustProxies::class,\r\n        \\Fruitcake\\Cors\\HandleCors::class,\r\n        \\App\\Http\\Middleware\\PreventRequestsDuringMaintenance::class,\r\n        \\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize::class,\r\n        \\App\\Http\\Middleware\\TrimStrings::class,\r\n        \\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull::class,\r\n    ];\r\n\r\n    /**\r\n     * The application's route middleware groups.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $middlewareGroups = [\r\n        'web' => [\r\n            \\App\\Http\\Middleware\\EncryptCookies::class,\r\n            \\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse::class,\r\n            \\Illuminate\\Session\\Middleware\\StartSession::class,\r\n            // \\Illuminate\\Session\\Middleware\\AuthenticateSession::class,\r\n            \\Illuminate\\View\\Middleware\\ShareErrorsFromSession::class,\r\n            \\App\\Http\\Middleware\\VerifyCsrfToken::class,\r\n            \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,\r\n        ],\r\n\r\n        'api' => [\r\n            'throttle:api',\r\n            \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,\r\n        ],\r\n    ];\r\n\r\n    /**\r\n     * The application's route middleware.\r\n     *\r\n     * These middleware may be assigned to groups or used individually.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $routeMiddleware = [\r\n        'auth' => \\App\\Http\\Middleware\\Authenticate::class,\r\n        'auth.basic' => \\Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth::class,\r\n        'cache.headers' => \\Illuminate\\Http\\Middleware\\SetCacheHeaders::class,\r\n        'can' => \\Illuminate\\Auth\\Middleware\\Authorize::class,\r\n        'guest' => \\App\\Http\\Middleware\\RedirectIfAuthenticated::class,\r\n        'password.confirm' => \\Illuminate\\Auth\\Middleware\\RequirePassword::class,\r\n        'signed' => \\Illuminate\\Routing\\Middleware\\ValidateSignature::class,\r\n        'throttle' => \\Illuminate\\Routing\\Middleware\\ThrottleRequests::class,\r\n        'verified' => \\Illuminate\\Auth\\Middleware\\EnsureEmailIsVerified::class,\r\n    ];\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Http/Kernel.php b/app/Http/Kernel.php
+--- a/app/Http/Kernel.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/app/Http/Kernel.php	(date 1616663548215)
+@@ -15,8 +15,8 @@
+      */
+     protected $middleware = [
+         // \App\Http\Middleware\TrustHosts::class,
+-        
+-      
++
++
+         \App\Http\Middleware\TrustProxies::class,
+         \Fruitcake\Cors\HandleCors::class,
+         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
+@@ -64,5 +64,10 @@
+         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
++        'admin' => \App\Http\Middleware\Admin::class,
++        'security' => \App\Http\Middleware\security::class,
++        'receptionist' => \App\Http\Middleware\receptionist::class,
++        'isSecurity' => \App\Http\Middleware\isSecurity::class,
++        'isAdmin' => \App\Http\Middleware\isAdmin::class,
+     ];
+ }
+Index: app/Http/Controllers/Auth/LoginController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Controllers\\Auth;\r\n\r\nuse App\\Http\\Controllers\\Controller;\r\nuse App\\Providers\\RouteServiceProvider;\r\nuse Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\r\n\r\nclass LoginController extends Controller\r\n{\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Login Controller\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | This controller handles authenticating users for the application and\r\n    | redirecting them to your home screen. The controller uses a trait\r\n    | to conveniently provide its functionality to your applications.\r\n    |\r\n    */\r\n\r\n    use AuthenticatesUsers;\r\n\r\n    /**\r\n     * Where to redirect users after login.\r\n     *\r\n     * @var string\r\n     */\r\n    protected $redirectTo = RouteServiceProvider::HOME;\r\n\r\n    /**\r\n     * Create a new controller instance.\r\n     *\r\n     * @return void\r\n     */\r\n    public function __construct()\r\n    {\r\n        $this->middleware('guest')->except('logout');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Http/Controllers/Auth/LoginController.php b/app/Http/Controllers/Auth/LoginController.php
+--- a/app/Http/Controllers/Auth/LoginController.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/app/Http/Controllers/Auth/LoginController.php	(date 1616752952182)
+@@ -5,36 +5,75 @@
+ use App\Http\Controllers\Controller;
+ use App\Providers\RouteServiceProvider;
+ use Illuminate\Foundation\Auth\AuthenticatesUsers;
++use Illuminate\Http\Request;
++use Illuminate\Support\Facades\Auth;
++use Validator;
++use Hash;
++use Session;
++use App\Models\User;
+ 
+ class LoginController extends Controller
+ {
+-    /*
+-    |--------------------------------------------------------------------------
+-    | Login Controller
+-    |--------------------------------------------------------------------------
+-    |
+-    | This controller handles authenticating users for the application and
+-    | redirecting them to your home screen. The controller uses a trait
+-    | to conveniently provide its functionality to your applications.
+-    |
+-    */
+-
+-    use AuthenticatesUsers;
+-
++    use AuthenticatesUsers
++     {
++         logout as performLogout;
++    }
+     /**
+      * Where to redirect users after login.
+      *
+      * @var string
+      */
+-    protected $redirectTo = RouteServiceProvider::HOME;
++
++//    protected $redirectTo = RouteServiceProvider::HOME;
+ 
+     /**
+      * Create a new controller instance.
+      *
+      * @return void
+      */
+-    public function __construct()
++
++    public function logout(Request $request)
++    {
++    $this->performLogout($request);
++    return redirect()->route('login');
++    }
++
++    public function showFormLogin()
+     {
+-        $this->middleware('guest')->except('logout');
++        if (Auth::check()) {
++            //Login Success
++            return redirect()->route('login');
++        }
++
+     }
++    public function login(Request $request)
++    {
++        $inputVal = $request->all();
++
++        $this->validate($request, [
++
++            'email' => 'required|email|exists:users,email',
++            'password' => 'required',
++        ]);
++        $credentials = $request->only('email', 'password');
++
++//        if (Auth::attempt($credentials)) {
++          if (auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))) {
++            if (auth()->user()->role_id == '111') {
++                return redirect()->route('gm_get');
++            }
++            if (auth()->user()->role_id == '121') {
++                return redirect()->route('guest_security');
++            }
++            if (auth()->user()->role_id == '131') {
++                return redirect()->route('guest_receptionist');
++            } else {
++                return redirect('login');
++            }
++
++        }
++
++    }
+ }
++
++
+Index: routes/web.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nuse Illuminate\\Support\\Facades\\Route;\r\nuse App\\Http\\Controllers\\GuestController;\r\nuse App\\Http\\Controllers\\AuthController;\r\nuse App\\Http\\Controllers\\HomeController;\r\n/*\r\n|--------------------------------------------------------------------------\r\n| Web Routes\r\n|--------------------------------------------------------------------------\r\n|\r\n| Here is where you can register web routes for your application. These\r\n| routes are loaded by the RouteServiceProvider within a group which\r\n| contains the \"web\" middleware group. Now create something great!\r\n|\r\n*/\r\n\r\n\r\nRoute::get('/try','GuestController@try');\r\nRoute::get('/create-account',function(){\r\n    $faker = Faker\\Factory::create() ;\r\n        for($i=0;$i<3;$i++){\r\n        $data[$i] = [\r\n                'name' => $faker->name,\r\n                'email' => $faker->unique()->safeEmail,\r\n                'email_verified_at' => now(),\r\n                'password' => bcrypt('password'),\r\n                'remember_token' => Str::random(10),\r\n            ];\r\n        }\r\n        DB::table('users')->insert($data);\r\n});\r\n\r\n\r\n\r\n\r\nRoute::get('/survey/guest','GuestController@guest')->name('survey');\r\nRoute::post('/survey/store','GuestController@store')->name('survey.store');\r\nRoute::get('/', 'GuestController@index')->name('guest_master');\r\n\r\nRoute::get('/guest_receptionist', 'GuestController@receptionist')->name('guest_receptionist')->middleware('receptionist');\r\n\r\nRoute::get('/guest_security', 'GuestController@security')->name('guest_security')->middleware('security');\r\nRoute::get('/guest_security/upt/{gm_id}', 'GuestController@security_upt')->name('scrt_upt');\r\n\r\nRoute::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('admin');\r\n\r\nRoute::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');\r\nRoute::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');\r\nRoute::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');\r\nRoute::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');\r\nRoute::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');\r\nRoute::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');\r\n\r\n//Route::get('/guest_master', [GuestController::class, 'index']);\r\n\r\nRoute::get('/contact', [GuestController::class, 'createForm']);\r\n\r\nRoute::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');\r\n\r\nAuth::routes();\r\nRoute::get('/home   ', [App\\Http\\Controllers\\HomeController::class, 'index'])->name('home');\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/routes/web.php b/routes/web.php
+--- a/routes/web.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/routes/web.php	(date 1616748566066)
+@@ -15,6 +15,17 @@
+ |
+ */
+ 
++Route::group(['middleware' => 'isAdmin'], function(){
++
++    Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('admin');
++    Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
++    Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
++    Route::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');
++    Route::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');
++    Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
++    Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
++
++});
+ 
+ Route::get('/try','GuestController@try');
+ Route::get('/create-account',function(){
+@@ -43,21 +54,11 @@
+ Route::get('/guest_security', 'GuestController@security')->name('guest_security')->middleware('security');
+ Route::get('/guest_security/upt/{gm_id}', 'GuestController@security_upt')->name('scrt_upt');
+ 
+-Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('admin');
+-
+-Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
+-Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
+-Route::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');
+-Route::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');
+-Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
+-Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
+-
+ //Route::get('/guest_master', [GuestController::class, 'index']);
+ 
+ Route::get('/contact', [GuestController::class, 'createForm']);
+ 
+ Route::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');
+-
+ Auth::routes();
+ Route::get('/home   ', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ 
+Index: app/Http/Controllers/HomeController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Controllers;\r\n\r\nuse Illuminate\\Http\\Request;\r\n\r\nclass HomeController extends Controller\r\n{\r\n    /**\r\n     * Create a new controller instance.\r\n     *\r\n     * @return void\r\n     */\r\n    public function __construct()\r\n    {\r\n        $this->middleware('auth');\r\n    }\r\n\r\n    /**\r\n     * Show the application dashboard.\r\n     *\r\n     * @return \\Illuminate\\Contracts\\Support\\Renderable\r\n     */\r\n    public function index()\r\n    {\r\n        return view('home');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Http/Controllers/HomeController.php b/app/Http/Controllers/HomeController.php
+--- a/app/Http/Controllers/HomeController.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/app/Http/Controllers/HomeController.php	(date 1616560366382)
+@@ -25,4 +25,19 @@
+     {
+         return view('home');
+     }
++
++    public function handleAdmin()
++    {
++        return view('\guest_mstr');
++    }
++
++    public function handlesecurity()
++    {
++        return view('/guest_security');
++    }
++    public function handlereceptionist()
++    {
++        return view('/guest_receptionist    ');
++    }
+ }
++
+Index: resources/views/home.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@extends('layouts.app')\r\n\r\n@section('content')\r\n<div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n        <div class=\"col-md-8\">\r\n            <div class=\"card\">\r\n\r\n\r\n                <div class=\"card-body\">\r\n                    @if (session('status'))\r\n                        <div class=\"alert alert-success\" role=\"alert\">\r\n                            {{ session('status') }}\r\n                        </div>\r\n                    @endif\r\n\r\n                    {{ __('Selamat Datang ') }}\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n@endsection\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/resources/views/home.blade.php b/resources/views/home.blade.php
+--- a/resources/views/home.blade.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/resources/views/home.blade.php	(date 1615955624395)
+@@ -1,23 +1,43 @@
+ @extends('layouts.app')
+ 
+ @section('content')
++
+ <div class="container">
+     <div class="row justify-content-center">
+         <div class="col-md-8">
+-            <div class="card">
+ 
+-
+-                <div class="card-body">
+-                    @if (session('status'))
+-                        <div class="alert alert-success" role="alert">
+-                            {{ session('status') }}
+-                        </div>
+-                    @endif
++                <div class="card card-row card-success">
++                    <div class="card-header">
++                        <h3 class="card-title">
++                            Done
++                        </h3>
++                    </div>
++                    <div class="card-body">
++                        <div class="card card-primary card-outline">
++                            <div class="card-header">
++                                @if (session('status'))
++                                    <div class="alert alert-success" role="alert">
++                                        {{ session('status') }}
++                                    </div>
++                                @endif
+ 
+-                    {{ __('Selamat Datang ') }}
+-                </div>
+-            </div>
+-        </div>
++                                <h5 class="card-title">Selamat Datang</h5>
++                                <div class="card-tools">
++                                    <a href="#" class="btn btn-tool btn-link">#1</a>
++                                    <a href="#" class="btn btn-tool">
++                                        <i class="fas fa-pen"></i>
++                                    </a>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++
++
++            </div>
++        </div>
++    </div>
++</div>
+     </div>
+ </div>
+ @endsection
+Index: database/migrations/2014_10_12_000000_create_users_table.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nuse Illuminate\\Database\\Migrations\\Migration;\r\nuse Illuminate\\Database\\Schema\\Blueprint;\r\nuse Illuminate\\Support\\Facades\\Schema;\r\n\r\nclass CreateUsersTable extends Migration\r\n{\r\n    /**\r\n     * Run the migrations.\r\n     *\r\n     * @return void\r\n     */\r\n    public function up()\r\n    {\r\n        Schema::create('users', function (Blueprint $table) {\r\n            $table->id();\r\n            $table->string('name');\r\n            $table->string('email')->unique();\r\n            $table->timestamp('email_verified_at')->nullable();\r\n            $table->string('password');\r\n            $table->string('role_id')->nullable();\r\n            $table->rememberToken();\r\n            $table->timestamps();\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Reverse the migrations.\r\n     *\r\n     * @return void\r\n     */\r\n    public function down()\r\n    {\r\n        Schema::dropIfExists('users');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/migrations/2014_10_12_000000_create_users_table.php b/database/migrations/2014_10_12_000000_create_users_table.php
+--- a/database/migrations/2014_10_12_000000_create_users_table.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/database/migrations/2014_10_12_000000_create_users_table.php	(date 1616147401324)
+@@ -26,7 +26,7 @@
+     }
+ 
+     /**
+-     * Reverse the migrations.
++     * Reverse the migrgations.
+      *
+      * @return void
+      */
+Index: app/Models/User.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Models;\r\n\r\nuse Illuminate\\Contracts\\Auth\\MustVerifyEmail;\r\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\r\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\r\nuse Illuminate\\Notifications\\Notifiable;\r\n\r\nclass User extends Authenticatable\r\n{\r\n    use HasFactory, Notifiable;\r\n\r\n    /**\r\n     * The attributes that are mass assignable.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $fillable = [\r\n        'name',\r\n        'email',\r\n        'password',\r\n    ];\r\n\r\n    /**\r\n     * The attributes that should be hidden for arrays.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $hidden = [\r\n        'password',\r\n        'remember_token',\r\n    ];\r\n\r\n    /**\r\n     * The attributes that should be cast to native types.\r\n     *\r\n     * @var array\r\n     */\r\n    protected $casts = [\r\n        'email_verified_at' => 'datetime',\r\n    ];\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Models/User.php b/app/Models/User.php
+--- a/app/Models/User.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/app/Models/User.php	(date 1615972013280)
+@@ -20,6 +20,8 @@
+         'name',
+         'email',
+         'password',
++        'role_id',
++
+     ];
+ 
+     /**
+Index: resources/views/auth/login.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<!--\r\nThis is a starter template page. Use this page to start your new project from\r\nscratch. This page gets rid of all links and provides the needed markup only.\r\n-->\r\n<html lang=\"en\">\r\n<style>\r\n    .body {\r\n\r\n        background: linear-gradient(to right, #2a1f4c 45%, #ef9b11 80%)\r\n    }\r\n</style>\r\n\r\n<head>\r\n    <meta charset=\"utf-8\">\r\n    <title>PT.Hariff DTE</title>\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n    <link rel=\"stylesheet\" href=\"path/to/font-awesome/css/font-awesome.min.css\">\r\n\r\n    <!-- Google Font: Source Sans Pro -->\r\n    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback\">\r\n    <!-- Font Awesome -->\r\n    <link rel=\"stylesheet\" href=\"{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css\">\r\n    <!-- Theme style -->\r\n    <link rel=\"stylesheet\" href=\"{{asset('assets')}}/dist/css/adminlte.min.css\">\r\n    <!-- daterange picker -->\r\n    <link rel=\"stylesheet\" href=\"{{asset('assets')}}/plugins/daterangepicker/daterangepicker.css\">\r\n    <link rel=\"stylesheet\" href=\"{{asset('assets')}}/dist/css/adminlte.css\">\r\n\r\n    <!-- jQuery -->\r\n    <script src=\"{{asset('assets')}}/plugins/jquery/jquery.min.js\"></script>\r\n</head>\r\n\r\n<body class=\"hold-transition layout-top-nav\">\r\n\r\n\r\n    <div class=\"wrapper\">\r\n\r\n        <!-- Content Wrapper. Contains page content -->\r\n        <div class=\"content-wrapper body\">\r\n            <!-- Content Header (Page header) -->\r\n            <div class=\"content-header\">\r\n                <div class=\"container\">\r\n                    <div class=\"row mb-2\">\r\n                        <div class=\"col-sm-12\">\r\n                            <center><img class=\"profile-user-img img-fluid img-circle\" src=\"{{asset('img')}}/HariffLogo1.jpeg\" alt=\"User profile picture\">\r\n                                <h1 class=\"m-0 text-light\"> PT.Hariff DTE </h1>\r\n                            </center>\r\n                        </div><!-- /.col -->\r\n\r\n                    </div><!-- /.row -->\r\n                </div><!-- /.container-fluid -->\r\n            </div>\r\n            <!-- /.content-header -->\r\n\r\n            <!-- Main content -->\r\n            <section class=\"content\">\r\n                <div class=\"container\">\r\n                    <div class=\"row justify-content-center\">\r\n                        <div class=\"col-md-4\">\r\n\r\n                            <!-- /.card-header -->\r\n                            <!-- form start -->\r\n\r\n                            <!-- jquery validation -->\r\n                            <div class=\"card card-primary\">\r\n                                <div class=\"card-header\">\r\n                                    <h3 class=\"card-title\">Silahkan Login : </h3>\r\n                                </div>\r\n                                <!-- /.card-header -->\r\n                                <!-- form start -->\r\n                                <form action=\"{{route('login')}}\" method=\"POST\" id=\"quickForm\" novalidate=\"novalidate\">\r\n                                    <div class=\"card-body\">\r\n                                        @csrf\r\n                                        <div class=\"input-group mb-3\">\r\n                                            <div class=\"input-group-prepend\">\r\n                                                <span class=\"input-group-text\"><i class=\"fas fa-user\"></i></span>\r\n                                            </div>\r\n                                            <input type=\"email\" name=\"email\"class=\"form-control\" placeholder=\"Email\">\r\n                                        </div>\r\n                                        <div class=\"input-group mb-3\">\r\n                                            <div class=\"input-group-prepend\">\r\n                                                <span class=\"input-group-text\"><i class=\"fas fa-lock\"></i></span>\r\n                                            </div>\r\n                                            <input type=\"password\" name=\"password\" class=\"form-control\" placeholder=\"password\">\r\n                                        </div>\r\n                                       \r\n                                        <div class=\"form-group mb-0\">\r\n                                             \r\n                                        </div>\r\n                                    </div>\r\n                                    <!-- /.card-body -->\r\n                                    <div class=\"card-footer\">\r\n                                        <button type=\"submit\" class=\"btn btn-primary\">SIGN IN</button>\r\n                                    </div>\r\n                                </form>\r\n                            </div>\r\n                            <!-- /.card -->\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n        </div>\r\n\r\n    </div>\r\n    </div>\r\n    </section>\r\n    <!-- Main Footer -->\r\n\r\n    </div>\r\n    <!-- ./wrapper -->\r\n    <footer class=\"main-footer\">\r\n        <div class=\"float-right d-none d-sm-block text-sm\">\r\n        </div>\r\n        <strong>Copyright © 2021 <a href=\"https://hariff.co.id/\">PT.Hariff DTE</a>.</strong> All rights reserved.\r\n    </footer>\r\n    </div>\r\n\r\n</html>\r\n\r\n<!-- REQUIRED SCRIPTS -->\r\n\r\n<!-- jQuery -->\r\n<script src=\"{{asset('assets')}}/plugins/jquery/jquery.min.js\"></script>\r\n<!-- Bootstrap 4 -->\r\n<script src=\"{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js\"></script>\r\n<!-- AdminLTE App -->\r\n<script src=\"{{asset('assets')}}/dist/js/adminlte.min.js\"></script>\r\n<!-- AdminLTE for demo purposes -->\r\n<script src=\"{{asset('assets')}}/dist/js/demo.js\"></script>\r\n<!-- date-range-picker -->\r\n{{--<script src=\"{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js\"></script>--}}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/resources/views/auth/login.blade.php b/resources/views/auth/login.blade.php
+--- a/resources/views/auth/login.blade.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/resources/views/auth/login.blade.php	(date 1616723844971)
+@@ -41,7 +41,7 @@
+             <!-- Content Header (Page header) -->
+             <div class="content-header">
+                 <div class="container">
+-                    <div class="row mb-2">
++                    <div class="row mb-12">
+                         <div class="col-sm-12">
+                             <center><img class="profile-user-img img-fluid img-circle" src="{{asset('img')}}/HariffLogo1.jpeg" alt="User profile picture">
+                                 <h1 class="m-0 text-light"> PT.Hariff DTE </h1>
+@@ -71,6 +71,15 @@
+                                 <!-- form start -->
+                                 <form action="{{route('login')}}" method="POST" id="quickForm" novalidate="novalidate">
+                                     <div class="card-body">
++                                        @if(count($errors) > 0)
++                                            <div class="alert alert-danger">
++                                                <ul>
++                                                    @foreach($errors->all() as $err)
++                                                        <li>{{ $err  }}</li>
++                                                    @endforeach
++                                                </ul>
++                                            </div>
++                                        @endif
+                                         @csrf
+                                         <div class="input-group mb-3">
+                                             <div class="input-group-prepend">
+@@ -84,9 +93,9 @@
+                                             </div>
+                                             <input type="password" name="password" class="form-control" placeholder="password">
+                                         </div>
+-                                       
+-                                        <div class="form-group mb-0">
+-                                             
++
++                                        <div class="form-group mb-0 ">
++
+                                         </div>
+                                     </div>
+                                     <!-- /.card-body -->
+@@ -100,8 +109,13 @@
+ 
+                     </div>
+                 </div>
++
+         </div>
+-
++        <footer class="main-footer">
++            <div class="d-sm-block text-sm">
++                <strong>Copyright © 2021 <a href="https://hariff.co.id/">PT.Hariff DTE</a>.</strong> All rights reserved.
++            </div>
++        </footer>
+     </div>
+     </div>
+     </section>
+@@ -109,13 +123,9 @@
+ 
+     </div>
+     <!-- ./wrapper -->
+-    <footer class="main-footer">
+-        <div class="float-right d-none d-sm-block text-sm">
+-        </div>
+-        <strong>Copyright © 2021 <a href="https://hariff.co.id/">PT.Hariff DTE</a>.</strong> All rights reserved.
+-    </footer>
++
+     </div>
+-
++</body>
+ </html>
+ 
+ <!-- REQUIRED SCRIPTS -->
+@@ -129,4 +139,4 @@
+ <!-- AdminLTE for demo purposes -->
+ <script src="{{asset('assets')}}/dist/js/demo.js"></script>
+ <!-- date-range-picker -->
+-{{--<script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>--}}
+\ No newline at end of file
++{{--<script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>--}}
+Index: app/Http/Middleware/Authenticate.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Middleware;\r\n\r\nuse Illuminate\\Auth\\Middleware\\Authenticate as Middleware;\r\n\r\nclass Authenticate extends Middleware\r\n{\r\n    /**\r\n     * Get the path the user should be redirected to when they are not authenticated.\r\n     *\r\n     * @param  \\Illuminate\\Http\\Request  $request\r\n     * @return string|null\r\n     */\r\n    protected function redirectTo($request)\r\n    {\r\n        if (! $request->expectsJson()) {\r\n            return route('login');\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Http/Middleware/Authenticate.php b/app/Http/Middleware/Authenticate.php
+--- a/app/Http/Middleware/Authenticate.php	(revision 4b3e589daa39d03c9891f7c86dfdaed5f87ca0b0)
++++ b/app/Http/Middleware/Authenticate.php	(date 1615974491875)
+@@ -18,4 +18,5 @@
+             return route('login');
+         }
+     }
++
+ }
