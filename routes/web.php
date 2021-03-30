@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,9 +32,19 @@ Route::get('/create-account',function(){
         }
         DB::table('users')->insert($data);
 });
+Route::middleware([\App\Http\Middleware\isAdmin::class])->group(function () {
 
-
-
+    Route::get('/isAdmin', 'loginController@index')->name('isAdmin')->middleware('isAdmin');
+    Route::get('/isSecurity', 'logincontroller@index')->name('isSecurity')->middleware('isSecurity');
+    Route::get('/receptionist', 'loginController@index')->name('receptionist')->middleware('receptioonist');
+    Route::get('logout', ' App\Http\Controllers\Auth\LoginController@logout');
+    Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
+    Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
+    Route::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');
+    Route::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');
+    Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
+    Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
+});
 
 Route::get('/survey/guest','GuestController@guest')->name('survey');
 Route::post('/survey/store','GuestController@store')->name('survey.store');
@@ -43,14 +55,9 @@ Route::get('/guest_receptionist', 'GuestController@receptionist')->name('guest_r
 Route::get('/guest_security', 'GuestController@security')->name('guest_security')->middleware('security');
 Route::get('/guest_security/upt/{gm_id}', 'GuestController@security_upt')->name('scrt_upt');
 
-Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('admin');
+Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('isAdmin');
 
-Route::get('/guest_category', 'GuestController@guest_cat')->name('gc_get');
-Route::post('/guest_category/crt', 'GuestController@guest_cat_crt')->name('gc_crt');
-Route::get('/guest_category/store', 'GuestController@guest_cat_store')->name('gc_store');
-Route::get('/guest_category/edit/{gc_id}', 'GuestController@guest_cat_edit')->name('gc_edit');
-Route::post('/guest_category/upt/{gc_id}', 'GuestController@guest_cat_upt')->name('gc_upt');
-Route::get('/guest_category/del/{gc_id}', 'GuestController@guest_cat_del')->name('gc_del');
+
 
 //Route::get('/guest_master', [GuestController::class, 'index']);
 
@@ -58,7 +65,7 @@ Route::get('/contact', [GuestController::class, 'createForm']);
 
 Route::post('/contact', [GuestController::class, 'guestForm'])->name('guest.store');
 
-Auth::routes();
+\Auth::routes();
 Route::get('/home   ', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
