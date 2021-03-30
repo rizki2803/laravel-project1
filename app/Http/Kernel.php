@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'security' => \App\Http\Middleware\security::class,
         'receptionist' => \App\Http\Middleware\receptionist::class,
 
+
     ];
 }
