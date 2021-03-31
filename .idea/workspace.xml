@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f3210b89-dd09-4209-8103-69ebb6a4c6cf" name="Default Changelist" comment="update login" />
+    <list default="true" id="f3210b89-dd09-4209-8103-69ebb6a4c6cf" name="Default Changelist" comment="update login">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +185,8 @@
       <workItem from="1617005214617" duration="7194000" />
       <workItem from="1617066242051" duration="1551000" />
       <workItem from="1617068550185" duration="1062000" />
-      <workItem from="1617071236939" duration="20256000" />
+      <workItem from="1617071236939" duration="21067000" />
+      <workItem from="1617152477354" duration="4275000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/master'">
       <created>1617010003669</created>
@@ -225,7 +230,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617095705042</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update login">
+      <created>1617096399954</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1617096399954</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update login">
+      <created>1617096540975</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617096540975</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

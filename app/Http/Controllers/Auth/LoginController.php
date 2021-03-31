@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use validator;
+
+
 class LoginController extends Controller
 
 {
@@ -53,8 +55,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $input = $request->all();
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'required|email' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+        ];
 
-        $this->validate($request, [
+            $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
@@ -68,11 +74,18 @@ class LoginController extends Controller
             }
             if (auth()->user()->role_id == 131) {
                 return redirect()->route('guest_receptionist');
-            } else {
-                return redirect()->route('login')
+            }
+            else {
+                return redirect()->back()
                     ->with('error', 'Email-Address And Password Are Wrong.');
             }
         }
+        else {
+            return redirect()->back()
+                ->with(['error' => 'Email-Address And Password Are Wrong.']);
+        }
+
+
     }
 }
 
