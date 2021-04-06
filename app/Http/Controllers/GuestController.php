@@ -109,7 +109,7 @@ class GuestController extends Controller
 
                                     \DB::table('guest_master')->insert($store);
 
-                                    Alert::success('Success Title', 'Data berhasil diisi');
+                                    Alert::success('Success Title', 'Data berhasil diisi, Silahkan Menunggu di Lobby');
                                 }
                         }
 
