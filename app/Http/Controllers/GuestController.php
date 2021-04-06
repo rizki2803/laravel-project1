@@ -39,19 +39,27 @@ class GuestController extends Controller
 
             $pic = $request->pic;
 
+            $pic_telp = $request->pic_telp;
+
             $simbol = '@';
 
-            if (preg_match("/$simbol/i", $pic))
+            if (preg_match("/$simbol/i", $pic_telp))
                 {
-                    $pic_conv = strtolower($pic);
+                    $pic_conv = strtolower($pic_telp);
                 }
 
             else
                 {
+                    if ($pic_telp !== null)
+                    {
+                        $pic_conv = strtolower($pic_telp);
+                    }
+
                     $pic_conv = strtoupper(str_replace(' ', '%20', $pic));
+
                 }
 
-            if($pic == null || empty($pic))
+            if($pic == null || empty($pic) )
                 {
                     Alert::error('ERROR', 'Nama/Telp/Email PIC tidak diisi, Silahkan masukan kembali!');
                 }

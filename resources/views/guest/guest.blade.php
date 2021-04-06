@@ -114,14 +114,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group ">
                       <label>Tujuan :</label><br>
-                      <label>Nama/Telp/Email PIC</label>
+                      <label>Nama PIC</label>
                        <div class="input-group">
                             <input id="pic" name="pic" type="text" class="form-control" placeholder="Enter ..." >
                        </div>
                     </div>
+                    <div class="form-group ">
+                      <label>Telp/Email PIC</label>
+                       <div class="input-group">
+                            <input id="pic_telp" name="pic_telp" type="text" class="form-control" placeholder="Enter ..." >
+                       </div>
+                    </div>
                     <div class="form-group">
                       <label>Waktu yang di janjikan :</label>
-
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="far fa-clock"}></i></span>
