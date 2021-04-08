@@ -50,16 +50,10 @@ class GuestController extends Controller
 
             else
                 {
-                    if ($pic_telp !== null)
-                    {
-                        $pic_conv = strtolower($pic_telp);
-                    }
-
-                    $pic_conv = strtoupper(str_replace(' ', '%20', $pic));
-
+                    $pic_conv = strtolower($pic_telp);
                 }
 
-            if($pic == null || empty($pic) )
+            if($pic == null || empty($pic) || $pic_telp == null || empty($pic_telp))
                 {
                     Alert::error('ERROR', 'Nama/Telp/Email PIC tidak diisi, Silahkan masukan kembali!');
                 }
@@ -73,7 +67,55 @@ class GuestController extends Controller
 
                     if($check === 'Tidak Ada')
                         {
-                            Alert::error('ERROR', 'Nama/Telp/Email PIC tidak sesuai, Silahkan masukan kembali!');
+
+                            $pic_conv = strtoupper(str_replace(' ', '%20', $pic));
+
+                            $url = 'http://hris.hariff.co.id/api/get_nama/'.$pic_conv;
+                            $response = file_get_contents($url);
+                            $check = json_decode($response);
+
+                            if($check === 'Tidak Ada')
+                            {
+                                Alert::error('ERROR', 'Nama/Telp/Email PIC tidak sesuai, Silahkan masukan kembali!');
+                            }
+
+                            elseif ($pic_conv == $check->emp_nama || $check->bio_email || $check->bio_no_hp)
+                            {
+                                $a = $check->emp_nama;
+                                $nama = $request->nama;
+                                if(!preg_match("/^[a-zA-Z ]*$/",$nama))
+                                {
+                                    $nama = false;
+                                    Alert::error('ERROR', 'Nama Harus diisi Dengan Huruf, Silahkan masukan kembali!');
+                                }
+
+                                else
+                                {
+                                    $store = [
+                                        'gm_id' => Uuid::uuid4(),
+                                        'gc_id' => $gc->gc_id,
+                                        'gm_nama' => strtoupper($nama),
+                                        'gm_tlp' => $request->tlp,
+                                        'gm_almt' => $request->alamat,
+                                        'gm_inst' => $request->nama_aktif,
+                                        'gm_pic' => $a,
+                                        'gm_wj' => $request->jam,
+                                        'gm_tjn' => $request->dtltujuan,
+                                        'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
+                                        'gm_suhu' => $request->suhu,
+                                        'gm_srv1' => ($request->r1 == "Ya") ? 1 : 0,
+                                        'gm_srv2' => ($request->r2 == "Ya") ? 1 : 0,
+                                        'gm_srv3' => ($request->r3 == "Ya") ? 1 : 0,
+                                        'gm_srv4' => ($request->r4 == "Ya") ? 1 : 0
+                                    ];
+
+                                    \DB::table('guest_master')->insert($store);
+
+                                    Alert::success('Success Title', 'Data berhasil diisi, Silahkan Menunggu di Lobby');
+                                }
+
+                            }
+
                         }
 
 
@@ -113,14 +155,10 @@ class GuestController extends Controller
                                 }
                         }
 
-                    else
-                        {
-                            Alert::error('Error Title', 'Data yang diisi mungkin belum sesuai atau ada yang masih kosong!');
-                        }
-
                 }
 
             return back();
+
         }
 
 
