@@ -19,7 +19,6 @@
         "nesbot/carbon": "^2.46",
         "ramsey/uuid": "^4.1",
         "realrashid/sweet-alert": "^3.2",
-        "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
@@ -27,7 +26,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
+        "nunomaduro/collision": "^5.4",
         "phpunit/phpunit": "^9.3.3"
     },
     "config": {

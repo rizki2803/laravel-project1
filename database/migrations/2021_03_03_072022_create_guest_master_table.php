@@ -31,6 +31,8 @@ class CreateGuestMasterTable extends Migration
             $table->boolean('gm_srv3')->nullable();
             $table->boolean('gm_srv4')->nullable();
             $table->datetime('gm_klr')->nullable();
+            $table->text('gm_path')->nullable();
+            $table->boolean('gm_u_stat')->nullable();
             $table->timestamps();
         });
     }

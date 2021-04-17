@@ -301,6 +301,27 @@ class GuestController extends Controller
             \DB::table('guest_master')->where('gm_id', $id)->update($store);
             return redirect()->back();
         }
+
+    public function security_upl(Request $request, $id)
+    {
+        //dd($request->all());
+
+        $this->validate($request, [
+            'ktp' => 'required|mimes:jpeg,png,jpg',
+        ]);
+
+        $file = $request->file('ktp');
+        $tujuan_upload = 'img/doc_ktp/';
+        $file->move($tujuan_upload,$file->getClientOriginalName());
+
+        $store = [
+            'gm_path' => $tujuan_upload."".$file->getClientOriginalName(),
+            'gm_u_stat' => '1',
+        ];
+
+        \DB::table('guest_master')->where('gm_id', $id)->update($store);
+        return redirect()->back();
+    }
 //END---------------------------SECURITY----------------------------------------------
 
     public function try()

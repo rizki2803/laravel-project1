@@ -54,6 +54,7 @@ Route::get('/guest_receptionist', 'GuestController@receptionist')->name('guest_r
 
 Route::get('/guest_security', 'GuestController@security')->name('guest_security')->middleware('security');
 Route::get('/guest_security/upt/{gm_id}', 'GuestController@security_upt')->name('scrt_upt');
+Route::post('/guest_security/upl/{gm_id}', 'GuestController@security_upl')->name('scrt_upl');
 
 Route::get('/guest_mstr', 'GuestController@guest_master')->name('gm_get')->middleware('isAdmin');
 
