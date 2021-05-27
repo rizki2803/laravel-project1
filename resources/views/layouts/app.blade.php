@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
   <!-- jQuery -->
   <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
+  <script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
 <script src="{{asset('assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -38,7 +39,7 @@
 <body class="hold-transition sidebar-mini layout-fixed" style="min-height: 100%;">
 
 <!-- Site wrapper -->
-<div class="wrapper">
+<div class="wrapper text-sm">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->

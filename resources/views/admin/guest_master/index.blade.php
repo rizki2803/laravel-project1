@@ -1,9 +1,19 @@
 @extends('layouts.app')
 @section('content')
 
-<!-- Main content -->
 </br>
 <section class="content">
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
@@ -23,8 +33,11 @@
                                 <label>Maximum date:</label>
                                 <input type="text" id="max" name="max" value="" />
                                   <button type="submit" id="date_filter" name="date_filter" class="btn btn-xs btn-secondary">
-                                      <i class="fa fa-search"> filter</i>
+                                      <i class="fa fa-search"></i> filter
                                   </button>
+                                  <a href="{{route('gm_get')}}" class="btn btn-xs btn-primary">
+                                      <i class="fa fa-sync" ></i> refresh
+                                  </a>
                               </div>
                           </div>
                       </form>
@@ -32,6 +45,9 @@
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>Action</th>
+                  <th>KTP</th>
+                  <th>OUT</th>
                   <th>Kategori</th>
                   <th>Nama Tamu</th>
                   <th>No. Telepon</th>
@@ -47,7 +63,6 @@
                   <th>Sakit Tenggorokan</th>
                   <th>Gangguan Penciuman</th>
                   <th>Jam Keluar</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,7 +71,52 @@
                 @endphp
                 @foreach($data as $guest_master)
                 <tr>
-                  <td>{{$no++}}</td>
+                    <td>{{$no++}}</td>
+                    <td>
+                        <div class="btn-group-vertical">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if ($guest_master->gm_path == "")
+                                        <li>
+                                            <a onclick="upl('{{$guest_master->gm_id}}')" href="" class="dropdown-item" data-toggle="modal" data-target="#modal-upload">
+                                                <i class="fa fa-file-upload" ></i>
+                                                &emsp;Upload KTP
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a onclick="viewImg('{{$guest_master->gm_path}}')" href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-view">
+                                                <i class="fa fa-eye "></i>
+                                                &emsp;View KTP
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if ($guest_master->gm_klr == "")
+                                        <li>
+                                            <a href="{{route('scrt_upt', $guest_master->gm_id)}}" class="dropdown-item">
+                                                <i class="fa fa-door-open "></i>
+                                                &emsp;Check-out
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    @if ($guest_master->gm_u_stat == "")
+                        <td><i class="fa fa-times-circle text-danger"></i></td>
+                    @else
+                        <td><i class="fa fa-check-circle text-success"></i></td>
+                    @endif
+                    @if ($guest_master->gm_klr == "")
+                        <td><i class="fa fa-exclamation-circle text-warning"></i></td>
+                    @else
+                        <td><i class="fa fa-check-circle text-success"></i></td>
+                    @endif
                   <td>{{$guest_master->gc_tipe}}</td>
                   <td>{{$guest_master->gm_nama}}</td>
                   <td>{{$guest_master->gm_tlp}}</td>
@@ -72,17 +132,7 @@
                   <td>{{($guest_master->gm_srv3 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_srv4 == "1")?"Ya":"Tidak"}}</td>
                   <td>{{($guest_master->gm_klr == "")?"Belum Keluar":$guest_master->gm_klr}}</td>
-                    <td>
 
-                        @if ($guest_master->gm_klr == "")
-                            <center>
-                                <a href="{{route('scrt_upt', $guest_master->gm_id)}}" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-door-open "> Check-out</i>
-                                </a>
-                            </center>
-                        @endif
-
-                    </td>
                 </tr>
                 @endforeach
               </tbody>
@@ -96,7 +146,51 @@
     <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
-</section>
+        <div class="modal fade" id="modal-upload">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload Foto KTP</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-upl" action="" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="input-group">
+                                <input type="file" name="ktp" id="ktp">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn-default btn-xs ">Upload</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="modal-view">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">View Foto KTP</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                            <img src="" id="view_ktp" width="auto" height="200px">
+                        </center>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
 <!-- /.content -->
 </section>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -147,5 +241,17 @@
         });
 
     });
+
+    function upl(id) {
+        var url = "{{route('scrt_upl','inikode')}}";
+        url = url.replace('inikode',id);
+        $("#form-upl").attr("action", url);
+
+    }
+    function viewImg(path){
+        var url = "{{asset('inipath')}}";
+        url = url.replace('inipath', path);
+        $("#view_ktp").attr("src", url);
+    }
 </script>
 @endsection

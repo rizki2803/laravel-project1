@@ -1,11 +1,9 @@
 @extends('layouts.app2')
 @section('content')
 
-    <!-- Bootstrap 4 -->
-    <script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<br>
+</br>
 <section class="content">
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -16,7 +14,7 @@
         </div>
     @endif
 
-    <div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12">
         <!-- /.card -->
@@ -26,14 +24,34 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+              <form method="get" action="{{url('/guest_security')}}">
+                  <div class="form-group">
+                      <div class="d-inline col-sm-6">
+                          <label>Minimum date:</label>
+                          <input type="text" id="min" name="min" value="" />
+                      </div>
+                      <div class="d-inline col-sm-6">
+                          <label>Maximum date:</label>
+                          <input type="text" id="max" name="max" value="" />
+                          <button type="submit" id="date_filter" name="date_filter" class="btn btn-xs btn-secondary">
+                              <i class="fa fa-search"></i> filter
+                          </button>
+                          <a href="{{url('/guest_security')}}" class="btn btn-xs btn-primary">
+                              <i class="fa fa-sync" ></i> refresh
+                          </a>
+                      </div>
 
+                  </div>
+              </form>
             <div class="row">
               <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover table-responsive text-nowrap">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Action</th>
-                      <th>Upload KTP</th>
+                      <th>KTP</th>
+                      <th>OUT</th>
                       <th>Kategori</th>
                       <th>Nama Tamu</th>
                       <th>No. Telepon</th>
@@ -53,9 +71,12 @@
                     </tr>
                   </thead>
                   <tbody>
-
-                    @foreach($data as $security)
-                    <tr>
+                  @php
+                      $no=1;
+                  @endphp
+                  @foreach($data as $security)
+                      <tr>
+                          <td>{{$no++}}</td>
                         <td>
                             <div class="btn-group-vertical">
                                 <div class="btn-group">
@@ -69,27 +90,43 @@
                                                 &emsp;Upload KTP
                                             </a>
                                         </li>
-                                        @endif
+                                        @else
+                                        <li>
+                                            <a onclick="upl('{{$security->gm_id}}')" href="" class="dropdown-item" data-toggle="modal" data-target="#modal-upload">
+                                                <i class="fa fa-file-upload" ></i>
+                                                &emsp;Re-Upload KTP
+                                            </a>
+                                        </li>
                                         <li>
                                             <a onclick="viewImg('{{$security->gm_path}}')" href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-view">
                                                 <i class="fa fa-eye "></i>
                                                 &emsp;View KTP
                                             </a>
                                         </li>
+                                        @endif
+
+                                        @if ($security->gm_klr == "")
+                                        <li>
+                                            <a href="{{route('scrt_upt', $security->gm_id)}}" class="dropdown-item">
+                                                <i class="fa fa-door-open "></i>
+                                                &emsp;Check-out
+                                            </a>
+                                        </li>
+                                        @endif
+
                                     </ul>
                                 </div>
                             </div>
-                            @if ($security->gm_klr == "")
-                                <a href="{{route('scrt_upt', $security->gm_id)}}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-door-open "> Check-out</i>
-                                </a>
-                            @endif
-
                         </td>
                         @if ($security->gm_u_stat == "")
-                            <td><i class="fa fa-file-upload text-danger"> No Upload</i></td>
+                            <td><i class="fa fa-times-circle text-danger"></i></td>
                         @else
-                            <td><i class="fa fa-file-upload text-success"> Uploaded</i></td>
+                            <td><i class="fa fa-check-circle text-success"></i></td>
+                        @endif
+                        @if ($security->gm_klr == "")
+                            <td><i class="fa fa-exclamation-circle text-warning"></i></td>
+                        @else
+                            <td><i class="fa fa-check-circle text-success"></i></td>
                         @endif
                           <td>{{$security->gc_tipe}}</td>
                           <td>{{$security->gm_nama}}</td>
@@ -134,7 +171,7 @@
                             <input type="file" name="ktp" id="ktp">
 
                             <div class="input-group-append">
-                                <button type="submit">Upload</button>
+                                <button type="submit" class="btn-default btn-xs ">Upload</button>
                             </div>
                         </div>
                     </form>
@@ -165,6 +202,10 @@
     </div>
 
 </section>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
   $(function() {
     $("#example2").DataTable({
@@ -186,5 +227,32 @@
       url = url.replace('inipath', path);
       $("#view_ktp").attr("src", url);
   }
+
+  $(document).ready(function(){
+
+      $('input[name="min"]').daterangepicker({
+          singleDatePicker: true,
+          showDropdowns: true,
+      });
+      $('input[name="max"]').daterangepicker({
+          singleDatePicker: true,
+          showDropdowns: true,
+      });
+
+      var minDate, maxDate;
+
+      // Refilter the table
+      $('#min, #max').on('change', function () {
+          // Create date inputs
+          minDate = new DateTime($('#min'), {
+              format: 'MM/DD/YYYY'
+          });
+          maxDate = new DateTime($('#max'), {
+              format: 'MM/DD/YYYY'
+          });
+
+      });
+
+  });
 </script>
 @endsection

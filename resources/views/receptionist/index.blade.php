@@ -25,8 +25,11 @@
                                   <label>Maximum date:</label>
                                   <input type="text" id="max" name="max" value="" />
                                   <button type="submit" id="date_filter" name="date_filter" class="btn btn-xs btn-secondary">
-                                      <i class="fa fa-search"> filter</i>
+                                      <i class="fa fa-search"></i> filter
                                   </button>
+                                  <a href="{{url('/guest_receptionist')}}" class="btn btn-xs btn-primary">
+                                      <i class="fa fa-sync" ></i> refresh
+                                  </a>
                               </div>
                           </div>
                       </form>

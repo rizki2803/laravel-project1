@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.card-header -->
                 <!-- form start -->
                 <div class="card-body">
-                  <form action="{{route('survey.store')}}" method="post">
+                  <form action="{{route('survey.store')}}" method="post" class="form-prevent-multiple-submits">
                     @csrf
                     <label>Pilih :</label><br>
                     <div class="form-group">
@@ -209,7 +209,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </table>
                           <br>
                       </div> <!-- /.card-body -->
-                          <input id="submit" type="submit" class="btn btn-primary float-right" value="submit" >
+                          <input id="submit" type="submit" class="btn btn-primary float-right button-prevent-multiple-submits" value="submit" >
                       <br><br>
                   </form>
                 </div>
@@ -264,6 +264,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
       })
       .filter(':checked').change();
+
+    $('.form-prevent-multiple-submits').on('submit', function(){
+        $('.button-prevent-multiple-submits').attr('disabled', 'true');
+    });
   });
 </script>
 

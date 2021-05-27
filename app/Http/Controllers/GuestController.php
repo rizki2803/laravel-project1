@@ -38,7 +38,7 @@ class GuestController extends Controller
             $gc = DB::table('guest_cat')->where('gc_tipe', $request->guestcategory)->first();
 
             $pic = $request->pic;
-
+/*
             $pic_telp = $request->pic_telp;
 
             $simbol = '@';
@@ -156,6 +156,28 @@ class GuestController extends Controller
                         }
 
                 }
+*/
+            $store = [
+                'gm_id' => Uuid::uuid4(),
+                'gc_id' => $gc->gc_id,
+                'gm_nama' => $request->nama,
+                'gm_tlp' => $request->tlp,
+                'gm_almt' => $request->alamat,
+                'gm_inst' => $request->nama_aktif,
+                'gm_pic' => $pic,
+                'gm_wj' => $request->jam,
+                'gm_tjn' => $request->dtltujuan,
+                'gm_jd' => Carbon::now()->setTimezone('asia/jakarta'),
+                'gm_suhu' => $request->suhu,
+                'gm_srv1' => ($request->r1 == "Ya") ? 1 : 0,
+                'gm_srv2' => ($request->r2 == "Ya") ? 1 : 0,
+                'gm_srv3' => ($request->r3 == "Ya") ? 1 : 0,
+                'gm_srv4' => ($request->r4 == "Ya") ? 1 : 0
+            ];
+
+            \DB::table('guest_master')->insert($store);
+
+            Alert::success('Success Title', 'Data berhasil diisi, Silahkan Menunggu di Lobby');
 
             return back();
 
@@ -271,7 +293,7 @@ class GuestController extends Controller
 //END---------------------------RECEPTIONIST----------------------------------------------
 
 //---------------------------SECURITY----------------------------------------------
-    public function security()
+    public function security(Request $request)
         {
 
             /*
@@ -282,12 +304,26 @@ class GuestController extends Controller
                 'data'=>$data
             ]);
             */
-
-                $data ['data'] = \DB::table('guest_master')
+            if(($request->has('min')) && ($request->has('max'))) {
+                $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                    ->wherebetween('gm_jd',[$request->min.' 00:00:00', $request->max.' 23:59:59'])
+                    ->get();
+                //dd($request->min, $request->max);
+            }
+            else {
+                //dd($request->date_filter);
+                $data = Guest::select('*')
+                    ->join('guest_cat', 'guest_cat.gc_id','=', 'guest_master.gc_id')
+                    ->get();
+            }
+                /*$data ['data'] = \DB::table('guest_master')
                                 ->join('guest_cat','guest_cat.gc_id','=','guest_master.gc_id')
                                 //->select('guest_master.id' ,'guest_cat.gc_tipe','guest_mstr.gm_nama')
-                                ->get();
-                return view ('security.index', $data);
+                                ->get();*/
+                return view ('security.index', [
+                    'data'=>$data
+                ]);
 
         }
 
